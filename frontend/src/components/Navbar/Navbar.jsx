@@ -41,7 +41,7 @@ const AppNavbar = () => {
               <span className="hot-badge">HOT</span>
             </NavLink>
 
-            <NavLink to="/blog" className="nav-link">Blog</NavLink>
+            <NavLink to="/blog" className="nav-link">log</NavLink>
             <NavLink to="/about" className="nav-link">About</NavLink>
             <NavLink to="/contact" className="nav-link">Contact</NavLink>
           </Nav>
