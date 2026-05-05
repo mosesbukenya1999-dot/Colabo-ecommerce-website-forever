@@ -6,12 +6,14 @@ import "dotenv/config";
 import connectDB from "./config/mongoDB.js";
 import productRouter from "./routers/productRouter.js";
 
-const app = express(); // ✅ MUST COME FIRST
-
+const app = express();
 const port = process.env.PORT || 4000;
 
-// middleware
-app.use(cors());
+// middleware (CORS FIRST)
+app.use(cors({
+  origin: "*"
+}));
+
 app.use(express.json());
 
 // static files
@@ -25,13 +27,13 @@ app.get("/", (req, res) => {
   res.send("API is Working");
 });
 
-// connect DB + start server
+// start server ONLY after DB connects
 connectDB()
   .then(() => {
     app.listen(port, () => {
-      console.log("Server is Running on port " + port);
+      console.log("Server running on port " + port);
     });
   })
   .catch((err) => {
-    console.log("DB Error:", err);
+    console.log("DB ERROR:", err);
   });
