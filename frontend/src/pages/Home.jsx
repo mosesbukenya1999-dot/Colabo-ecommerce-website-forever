@@ -4,7 +4,7 @@ import QuikFilter from '../components/QuikFilter/QuikFilter'
 
 const Home = () => {
   return (
-    <div>
+    <div className=''>
         <Hero/>
         <QuikFilter/>
     </div>
