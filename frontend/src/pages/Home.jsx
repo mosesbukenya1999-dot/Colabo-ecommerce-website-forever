@@ -1,6 +1,7 @@
 import React from 'react'
 import Hero from '../components/Hero/Hero'
 import QuikFilter from '../components/QuikFilter/QuikFilter'
+import ProductSee from '../components/ProductSee/ProductSee'
 
 
 const Home = () => {
@@ -8,7 +9,7 @@ const Home = () => {
     <div className=''>
         <Hero/>
         <QuikFilter/>
-       
+       <ProductSee/>
     </div>
   )
 }
