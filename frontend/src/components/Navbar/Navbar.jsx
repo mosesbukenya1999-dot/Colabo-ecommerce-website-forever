@@ -43,7 +43,7 @@ const AppNavbar = () => {
 
             <NavLink to="/blog" className="nav-link">Blog</NavLink>
             <NavLink to="/about" className="nav-link">About</NavLink>
-            <NavLink to="/contact" className="nav-link">Contact</NavLink>
+            <NavLink to="/contact" className="nav-link">Contacts</NavLink>
           </Nav>
 
           <div className="d-flex gap-3 align-items-center">
