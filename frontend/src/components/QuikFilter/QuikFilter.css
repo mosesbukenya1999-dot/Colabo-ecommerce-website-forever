@@ -1,0 +1,111 @@
+/* Container layout */
+.filter-cards {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+        margin-bottom:100px
+  }
+  
+  /* Card */
+  .filter-card {
+    width: 30rem;
+
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 1px solid rgb(186, 186, 186);
+  }
+  
+  /* Hover lift */
+  .filter-card:hover {
+    transform: translateY(-8px);
+  }
+  
+  /* Image wrapper */
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Image */
+  .image-wrapper img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    object-position: center top;   /* try these */
+    /* object-position: center; */
+    /* object-position: top; */
+    /* object-position: bottom; */
+  }
+  
+  /* Zoom on hover */
+  .filter-card:hover img {
+    transform: scale(1.1);
+  }
+  
+  /* Overlay */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    
+    transition: 0.3s ease;
+  }
+  
+  /* Darker on hover */
+  .filter-card:hover .overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.2)
+    );
+  }
+  
+  /* Text content */
+  .overlay-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    z-index: 2;
+  }
+  
+  .overlay-content h5 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 600;
+  }
+  
+  .overlay-content p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-bottom: 10px;
+  }
+  
+  /* Button */
+  .overlay-btn {
+    padding: 6px 14px;
+    border: none;
+    background: #fff;
+    color: #000;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+  }
+  
+  /* Button animation */
+  .filter-card:hover .overlay-btn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Mobile */
+  @media (max-width: 768px) {
+    .filter-card {
+      width: 100%;
+    }
+  }

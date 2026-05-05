@@ -1,0 +1,108 @@
+/* Prevent global overflow */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  
+}
+
+/* HERO WRAPPER */
+.hero-wrapper {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* CAROUSEL CORE FIX */
+.hero-carousel,
+.carousel,
+.carousel-inner,
+.carousel-item {
+  width: 100%;
+  height: 95vh;
+}
+
+/* IMAGE FIX */
+.hero-img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* DARK OVERLAY (BETTER VERSION) */
+.carousel-item {
+  position: relative;
+}
+
+
+
+/* CAPTION FIX */
+.hero-caption {
+  position: absolute;
+  z-index: 2;
+  bottom: 25%;
+  left: 8%;
+  max-width: 500px;
+  text-align: left;
+}
+
+/* TEXT SAFETY */
+.hero-caption h1,
+.hero-caption p {
+  word-break: break-word;
+  margin-left: 80px;
+}
+
+.hero-caption h1 {
+  font-family: poppins;
+}
+
+.hero-caption p {
+  font-family: serif;
+  font-size: 48px;
+  color: black;
+  font-weight: 800;
+}
+
+/* BUTTON */
+.hero-btn {
+  margin-top: 15px;
+  padding: 12px 26px;
+  background: #fff;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-left: 80px;
+}
+
+.hero-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero-caption {
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 90%;
+  }
+
+  .hero-caption h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-caption p {
+    font-size: 0.95rem;
+  }
+}
+
+.first,
+.middle,
+.hero-btn {
+  display: inline-block;
+}

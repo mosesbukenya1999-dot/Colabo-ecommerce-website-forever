@@ -1,0 +1,117 @@
+.card-container {
+    width:80%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 1px;
+}
+
+.card-container:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.overview-sect {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.overview-sect .d-flex.gap-4 {
+    flex-wrap: wrap; /* prevents overflow */
+}
+
+.card-image {
+    width:100%;
+    height: 340px;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.card-container:hover .card-image img {
+    transform: scale(1.2);
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.7s ease;
+}
+
+.btn-view {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    border-radius: 30px;
+    width: 130px;
+    height: 40px;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0;
+    transform: translate(-50%, 20px);
+    transition: all 0.3s ease;
+}
+
+
+
+.card-container:hover .btn-view {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 4px;
+}
+
+/* LEFT SIDE */
+.card-content .left {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.card-name {
+    font-size: 14px;
+    color: #555;
+}
+
+.card-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+}
+
+/* RIGHT SIDE */
+.card-content .right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+/* HEART ICON */
+.card-content .right i {
+    font-size: 18px;
+    color: #aaa;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.card-content .right i:hover {
+    color: #ff4d6d;
+    transform: scale(1.15);
+}
+
+/* CATEGORY */
+.card-category {
+    font-size: 12px;
+    color: #8888ff;
+}

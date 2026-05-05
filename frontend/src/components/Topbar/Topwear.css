@@ -1,0 +1,15 @@
+.right-col .text {
+    border-left: 1px solid #c0c0c0;
+    padding-left: 10px;
+    font-size: 12px;
+    
+}
+
+.text:hover {
+    color: rgb(108, 142, 255);
+}
+
+.left-col {
+    font-size: 14px;
+    font-family: serif;
+}
