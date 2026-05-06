@@ -1,10 +1,81 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./ProductSee.css";
+import { ShopContext } from '../../context/ShopContext';
+import ProductItem from '../productItem/ProductItem';
 
 const ProductSee = () => {
-  return (
-    <div>ProductSee</div>
-  )
+
+    const { products } = useContext(ShopContext);
+
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [activeCategory, setActiveCategory] = useState("All");
+    const [sortOption, setSortOption] = useState("relevant");
+
+    useEffect(() => {
+        let updated = [...products];
+
+        // FILTER
+        if (activeCategory !== "All") {
+            updated = updated.filter(p => p.category === activeCategory);
+        }
+
+        // SORT
+        if (sortOption === "low-high") {
+            updated.sort((a, b) => a.price - b.price);
+        } else if (sortOption === "high-low") {
+            updated.sort((a, b) => b.price - a.price);
+        }
+
+        setFilteredProducts(updated);
+
+    }, [products, activeCategory, sortOption]);
+
+    return (
+        <div className='container product-see'>
+
+            {/* FILTER BAR */}
+            <div className="filter-bar">
+                <div className="filter-buttons">
+                    {["All", "Kids", "Men", "Women", "Shoes", "Watches"].map(cat => (
+                        <button
+                            key={cat}
+                            className={activeCategory === cat ? "active" : ""}
+                            onClick={() => setActiveCategory(cat)}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+
+                {/* SORT */}
+                <select onChange={(e) => setSortOption(e.target.value)}>
+                    <option value="relevant">Relevant</option>
+                    <option value="low-high">Low - High</option>
+                    <option value="high-low">High - Low</option>
+                </select>
+            </div>
+
+            {/* TITLE */}
+            <h1 className="title">Product Overview</h1>
+
+            {/* PRODUCTS */}
+            <div className="products-grid">
+                {
+                    filteredProducts.map((item,index) => (
+                        <ProductItem
+                            key={item._id}
+                            id={item._id}
+                            name={item.name}
+                            price={item.price}
+                            images={item.images}
+                            category={item.category}
+                            delay={index * 80} // 🔥 stagger effect
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    )
 }
 
-export default ProductSee
+export default ProductSee;
