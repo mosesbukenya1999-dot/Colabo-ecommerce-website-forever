@@ -19,6 +19,11 @@ const ProductItem = ({ name, images = [], price, category, id ,delay = 0 }) => {
             {/* QUICK VIEW */}
             <button className="btn-view">Quick View</button>
 
+{/* HEART */}
+<button className="heart-btn">
+    <i className="bi bi-heart"></i>
+</button>
+
             {/* CONTENT */}
             <div className="card-content">
                 <div className="left">
@@ -27,7 +32,7 @@ const ProductItem = ({ name, images = [], price, category, id ,delay = 0 }) => {
                 </div>
 
                 <div className="right">
-                    <i className="bi bi-heart"></i>
+                
                     <span className="card-category">{category}</span>
                 </div>
             </div>

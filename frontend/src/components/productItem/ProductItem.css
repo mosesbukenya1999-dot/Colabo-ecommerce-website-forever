@@ -13,6 +13,8 @@
     margin: 0 auto;
 }
 
+.bi-heart {}
+
 .card-container:hover {
     transform: translateY(-6px) scale(1.02);
     box-shadow: 0 18px 40px rgba(0,0,0,0.12);
@@ -86,6 +88,7 @@
     font-size: 16px;
     font-weight: bold;
     margin-top: 4px;
+    color: rgb(239, 122, 122);
 }
 
 .right {
@@ -114,12 +117,14 @@
         max-width: 100%;
     }
 
+
+
     .card-image {
         aspect-ratio: 1 / 1; /* keeps 2 cards clean */
     }
 
     .card-name {
-        font-size: 13px;
+        font-size: 10px;
     }
 
     .card-price {
