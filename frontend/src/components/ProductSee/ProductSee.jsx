@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import "./ProductSee.css";
 import { ShopContext } from '../../context/ShopContext';
 import ProductItem from '../productItem/ProductItem';
 
 const ProductSee = () => {
-
-    const { products } = useContext(ShopContext);
+    const { products, loading, error, fetchProducts } = useContext(ShopContext);
 
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState("All");
@@ -20,14 +19,10 @@ const ProductSee = () => {
         }
 
         // SORT
-        if (sortOption === "low-high") {
-            updated.sort((a, b) => a.price - b.price);
-        } else if (sortOption === "high-low") {
-            updated.sort((a, b) => b.price - a.price);
-        }
+        if (sortOption === "low-high") updated.sort((a, b) => a.price - b.price);
+        else if (sortOption === "high-low") updated.sort((a, b) => b.price - a.price);
 
         setFilteredProducts(updated);
-
     }, [products, activeCategory, sortOption]);
 
     return (
@@ -48,7 +43,7 @@ const ProductSee = () => {
                 </div>
 
                 {/* SORT */}
-                <select onChange={(e) => setSortOption(e.target.value)}>
+                <select onChange={(e) => setSortOption(e.target.value)} value={sortOption}>
                     <option value="relevant">Relevant</option>
                     <option value="low-high">Low - High</option>
                     <option value="high-low">High - Low</option>
@@ -58,10 +53,26 @@ const ProductSee = () => {
             {/* TITLE */}
             <h1 className="title">Product Overview</h1>
 
+            {/* LOADING */}
+            {loading && (
+                <div className="loading">
+                    <div className="spinner"></div>
+                    <p>Loading products, please wait...</p>
+                </div>
+            )}
+
+            {/* ERROR */}
+            {error && (
+                <div className="error">
+                    <p>{error}</p>
+                    <button onClick={fetchProducts}>Retry</button>
+                </div>
+            )}
+
             {/* PRODUCTS */}
-            <div className="products-grid">
-                {
-                    filteredProducts.map((item,index) => (
+            {!loading && !error && (
+                <div className="products-grid">
+                    {filteredProducts.map((item, index) => (
                         <ProductItem
                             key={item._id}
                             id={item._id}
@@ -69,13 +80,14 @@ const ProductSee = () => {
                             price={item.price}
                             images={item.images}
                             category={item.category}
-                            delay={index * 80} // 🔥 stagger effect
+                            delay={index * 80} // stagger effect
                         />
-                    ))
-                }
-            </div>
+                    ))}
+                    {filteredProducts.length === 0 && <p className="no-products">No products found.</p>}
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default ProductSee;

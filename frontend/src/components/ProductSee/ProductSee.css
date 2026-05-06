@@ -16,7 +16,7 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    color: white;
+    
 }
 
 .filter-buttons button {
@@ -68,4 +68,52 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
+}
+/* ProductSee.css */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.loading .spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #ff6f61;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error {
+    text-align: center;
+    color: red;
+    margin: 30px 0;
+}
+
+.error button {
+    padding: 8px 15px;
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.no-products {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+    font-size: 1.2rem;
 }

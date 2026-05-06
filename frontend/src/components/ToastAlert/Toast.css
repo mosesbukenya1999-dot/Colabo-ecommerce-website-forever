@@ -1,0 +1,34 @@
+/* components/Toast/Toast.css */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    min-width: 250px;
+    max-width: 90%;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease-in-out;
+    z-index: 9999;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.error {
+    background: linear-gradient(135deg, #f44336, #ff7961);
+}
+
+.toast.success {
+    background: linear-gradient(135deg, #4caf50, #80e27e);
+}
+
+.toast.info {
+    background: linear-gradient(135deg, #2196f3, #64b5f6);
+}
