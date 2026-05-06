@@ -1,61 +1,56 @@
 import productModel from "../models/productModel.js";
 
-
 const addProduct = async (req, res) => {
-    try {
-      const { name, description, price, bestseller, category, subCategory, sizes } = req.body;
-  
-      // collect files from multer
-      const imageFiles = [req.files.image1, req.files.image2, req.files.image3, req.files.image4]
-        .flat() // flatten arrays
-        .filter(Boolean); // remove undefined
-  
-      // Cloudinary URLs
-      const imagesUrl = imageFiles.map(file => file.path); // <- this is the key change
-  
-      const productData = {
-        name,
-        description,
-        sizes: JSON.parse(sizes),
-        price,
-        bestseller: bestseller === "true" ? true : false,
-        category,
-        subCategory,
-        images: imagesUrl,
-      };
-  
-      const product = new productModel(productData);
-      await product.save();
-  
-      res.json({ success: true, message: "Product Added" });
-    } catch (error) {
-      console.log(error);
-      res.json({ success: false, message: error.message });
-    }
-  };
+  try {
+    const { name, description, price, bestseller, category, subCategory, sizes } = req.body;
 
-const listProduct = async (req,res)=>{
-    try {
-        
-        const products = await productModel.find({});
+    const images = ["image1", "image2", "image3", "image4"]
+      .map((key) => req.files[key]?.[0])
+      .filter(Boolean);
 
-        res.json({success:true, products})
+    // Cloudinary stores file info in file.path
+    const imagesUrl = images.map((file) => file.path);
 
-    } catch (error) {
-        console.log(error);
-        res.json({success:false,message:error.message})
-    }
-}
+    const productData = {
+      name,
+      description,
+      sizes: JSON.parse(sizes || "[]"),
+      price,
+      bestseller: bestseller === "true",
+      category,
+      subCategory,
+      images: imagesUrl,
+    };
 
-const removeProduct = async (req,res)=>{
-    try {
-        
-        
+    const product = new productModel(productData);
+    await product.save();
 
-    } catch (error) {
-        console.log(error);
-        res.json({success:false,message:error.message})
-    }
-}
+    res.json({ success: true, message: "Product added successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
 
-export {addProduct,listProduct,removeProduct}
+const listProduct = async (req, res) => {
+  try {
+    const products = await productModel.find({});
+    res.json({ success: true, products });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+const removeProduct = async (req, res) => {
+  try {
+    const { productId } = req.body;
+    await productModel.findByIdAndDelete(productId);
+    res.json({ success: true, message: "Product removed" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+export { addProduct, listProduct, removeProduct };

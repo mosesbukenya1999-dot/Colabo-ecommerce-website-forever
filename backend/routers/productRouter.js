@@ -1,18 +1,22 @@
+// routers/productRouter.js
 import express from "express";
 import { addProduct, listProduct, removeProduct } from "../controllers/ProductController.js";
-import uploads from "../middlewares/multer.js";
+import upload from "../middlewares/multer.js";
 
+const router = express.Router();
 
-const productRouter = express.Router();
+router.post(
+  "/add",
+  upload.fields([
+    { name: "image1", maxCount: 1 },
+    { name: "image2", maxCount: 1 },
+    { name: "image3", maxCount: 1 },
+    { name: "image4", maxCount: 1 },
+  ]),
+  addProduct
+);
 
-productRouter.post("/add",uploads.fields([
-    {name:"image1", maxCount:1},
-    {name:"image2", maxCount:1},
-    {name:"image3", maxCount:1},
-    {name:"image4", maxCount:1},
-]),addProduct);
-productRouter.get("/list",listProduct);
-productRouter.post("/remove",removeProduct);
+router.get("/list", listProduct);
+router.post("/remove", removeProduct);
 
-
-export default productRouter
+export default router;
