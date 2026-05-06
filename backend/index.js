@@ -16,8 +16,8 @@ app.use(cors({
 
 app.use(express.json());
 
-// static files
-app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+/* // static files
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads"))); */
 
 // routes
 app.use("/api/products", productRouter);

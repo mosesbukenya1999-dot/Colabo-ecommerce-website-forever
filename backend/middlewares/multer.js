@@ -1,34 +1,16 @@
 import multer from "multer";
-import path from "path";
-import fs from "fs";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "./cloudinary.js";
 
+const storage = new CloudinaryStorage({
+    cloudinary,
+    params: async (req, file) => ({
+      folder: "ecommerce-products", // 👈 force folder creation
+      resource_type: "image",
+      format: "png", // optional but stabilizes uploads
+    }),
+  });
 
-const uploadDir = "uploads";
+const upload = multer({ storage });
 
-if(!fs.existsSync(uploadDir)) fs.mkdir(uploadDir);
-
-const storage = multer.diskStorage({
-    destination:(req,file,cb)=>{
-        cb(null, uploadDir)
-    },
-
-    filename:(req,file,cb)=>{
-        const uniqueSuffix = Date.now()+"-"+ Math.round(Math.random()*1e9);
-        cb(null, uniqueSuffix+path.extname(file.originalname))
-    }
-});
-
-const fileFilter = (req,file,cb)=>{
-    const allowed = ["image/jpg","image/jpeg","image/png","image/webp"];
-
-    if (allowed.includes(file.mimetype)) {
-        cb(null, true)
-    }else{
-        cb(new Error("Only Images Allowed"), false);
-    }
-
-};
-
-const uploads = multer({storage,fileFilter});
-
-export default uploads;
+export default upload;
