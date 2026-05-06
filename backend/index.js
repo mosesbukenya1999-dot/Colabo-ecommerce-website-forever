@@ -11,7 +11,8 @@ const port = process.env.PORT || 4000;
 
 // middleware (CORS FIRST)
 app.use(cors({
-  origin: "*"
+  origin: "*", // or your frontend domain
+  methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 
 app.use(express.json());
