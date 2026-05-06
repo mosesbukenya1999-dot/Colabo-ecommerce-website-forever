@@ -47,33 +47,26 @@ const ShopContextProvider = (props) => {
 
     
 
-    const [toast, setToast] = useState(null);
-
-const showToast = (message, type = "error") => {
-    setToast({ message, type });
-};
-
-// Update fetchProducts
-const fetchProducts = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-        const res = await axios.get(backendUrl + "/api/products/list", {
-            headers: { "Cache-Control": "no-cache" },
-        });
-        setProducts(res.data.products);
-    } catch (err) {
-        console.error(err);
-        const message = !err.response
-            ? "Network error! Check your internet connection or server URL."
-            : "Failed to load products. Server returned an error.";
-        setError(message);
-        showToast(message, "error"); // 🚀 show toast instead of alert
-    } finally {
-        setLoading(false);
-    }
-};
+    const fetchProducts = async () => {
+        setLoading(true);
+        setError(null);
+    
+        try {
+            const res = await axios.get(backendUrl + "/api/products/list", {
+                headers: { 'Cache-Control': 'no-cache' }
+            });
+            setProducts(res.data.products);
+        } catch (err) {
+            console.error(err);
+            if (!err.response) {
+                setError("Network error! Check your internet connection or server URL.");
+            } else {
+                setError("Failed to load products. Server returned an error.");
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         fetchProducts();
@@ -97,13 +90,6 @@ const fetchProducts = async () => {
     return (
         <ShopContext.Provider value={value}>
             {props.children}
-            {toast && (
-                <Toast
-                    message={toast.message}
-                    type={toast.type}
-                    onClose={() => setToast(null)}
-                />
-            )}
         </ShopContext.Provider>
     );
 };
