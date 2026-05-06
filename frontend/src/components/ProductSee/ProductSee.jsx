@@ -39,7 +39,7 @@ const ProductSee = () => {
                     {["All", "Kids", "Men", "Women", "Shoes", "Watches"].map(cat => (
                         <button
                             key={cat}
-                            className={activeCategory === cat ? "active" : ""}
+                            className={activeCategory === cat ? "active text-white" : "text-dark"}
                             onClick={() => setActiveCategory(cat)}
                         >
                             {cat}

@@ -99,6 +99,26 @@ html, body {
   .hero-caption p {
     font-size: 0.95rem;
   }
+
+  .hero-wrapper {
+    height: 50vh;
+  }
+
+  .hero-img {
+    height: 50vh;
+  }
+
+  .hero-caption {
+    top: 15%;
+    left: 43%;
+  }
+
+  .hero-caption p{
+    color: #fff;
+  }
+  .hero-caption h1 {
+    font-weight: 600;
+  }
 }
 
 .first,

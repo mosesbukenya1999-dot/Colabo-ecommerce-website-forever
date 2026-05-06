@@ -56,7 +56,7 @@ const Hero = () => {
         fade
         interval={4000}
         indicators={false}
-        controls={true}
+        controls={false}
         className="hero-carousel"
       >
 

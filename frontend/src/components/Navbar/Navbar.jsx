@@ -1,59 +1,104 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Navbar as BSNavbar, Nav, Container } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { Search, Cart, Heart } from "react-bootstrap-icons";
+import { Search, Cart, Heart, X } from "react-bootstrap-icons";
 import "./Navbar.css";
 import { ShopContext } from "../../context/ShopContext";
 
 const AppNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  const {getCartCount}= useContext(ShopContext)
+  const { getCartCount } = useContext(ShopContext);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const closeMenu = () => setExpanded(false);
+
   return (
     <BSNavbar
       className={`custom-navbar ${scrolled ? "scrolled" : ""}`}
       expand="lg"
+      expanded={expanded}
     >
       <Container>
+
+        {/* BRAND */}
         <BSNavbar.Brand className="fw-bold text-black">
           COZA <span className="text-secondary fw-medium">STORE</span>
         </BSNavbar.Brand>
 
-        <BSNavbar.Toggle aria-controls="main-nav" />
+        {/* TOGGLE */}
+        <BSNavbar.Toggle
+          aria-controls="main-nav"
+          onClick={() => setExpanded(!expanded)}
+        />
 
         <BSNavbar.Collapse id="main-nav">
-          <Nav className="me-auto ms-auto">
-            <NavLink to="/" className="nav-link">Home</NavLink>
-            <NavLink to="/shop" className="nav-link">Shop</NavLink>
 
-            <NavLink to="/features" className="nav-link position-relative">
+          {/* CLOSE BUTTON (MOBILE ONLY) */}
+          <div className="mobile-close d-lg-none">
+            <X onClick={closeMenu} />
+          </div>
+
+          {/* NAV LINKS */}
+          <Nav className="me-auto ms-auto nav-links">
+
+            <NavLink to="/" className="nav-link" onClick={closeMenu}>
+              Home
+            </NavLink>
+
+            <NavLink to="/shop" className="nav-link" onClick={closeMenu}>
+              Shop
+            </NavLink>
+
+            <NavLink to="/features" className="nav-link position-relative" onClick={closeMenu}>
               Features
               <span className="hot-badge">HOT</span>
             </NavLink>
 
-            <NavLink to="/blog" className="nav-link">Blog</NavLink>
-            <NavLink to="/about" className="nav-link">About</NavLink>
-            <NavLink to="/contact" className="nav-link">Contacts</NavLink>
+            <NavLink to="/blog" className="nav-link" onClick={closeMenu}>
+              Blog
+            </NavLink>
+
+            <NavLink to="/about" className="nav-link" onClick={closeMenu}>
+              About
+            </NavLink>
+
+            <NavLink to="/contact" className="nav-link" onClick={closeMenu}>
+              Contact
+            </NavLink>
           </Nav>
 
-          <div className="d-flex gap-3 align-items-center">
+          {/* RIGHT SIDE ACTIONS */}
+          <div className="nav-actions">
+
             <Search className="nav-icon" />
-            <NavLink to={"/cart"} className=" cart-container">
-            <Cart className="nav-icon" />
+
+            {/* CART */}
+            <NavLink to="/cart" className="cart-container" onClick={closeMenu}>
+              <Cart className="nav-icon" />
               <p>{getCartCount()}</p>
             </NavLink>
+
             <Heart className="nav-icon" />
+
+            {/* 🔐 LOGIN (ONLY MOBILE) */}
+            <NavLink
+              to="/login"
+              className="mobile-login-btn d-lg-none"
+              onClick={closeMenu}
+            >
+              Login
+            </NavLink>
+
           </div>
+
         </BSNavbar.Collapse>
       </Container>
     </BSNavbar>

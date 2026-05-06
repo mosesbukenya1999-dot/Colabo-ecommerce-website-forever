@@ -16,6 +16,7 @@
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    color: white;
 }
 
 .filter-buttons button {
@@ -25,6 +26,7 @@
     border-radius: 20px;
     cursor: pointer;
     transition: 0.3s;
+    font-size: 14px;
 }
 
 .filter-buttons button:hover {
@@ -41,6 +43,7 @@
     padding: 8px 12px;
     border-radius: 8px;
     border: 1px solid #ccc;
+    color: #333;
 }
 
 /* TITLE */
@@ -53,8 +56,16 @@
 /* GRID */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 260px));
     gap: 20px;
-    justify-content: center; 
+    justify-content: center;
     transition: all 0.3s ease;
+}
+
+/* 📱 MOBILE → EXACTLY 2 CARDS */
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
 }
