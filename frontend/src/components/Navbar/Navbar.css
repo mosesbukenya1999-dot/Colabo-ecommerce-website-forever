@@ -156,6 +156,10 @@
   display: none;
 }
 
+.store-text {
+  color: #eda1a1;
+}
+
 /* TABLET + MOBILE */
 @media (max-width: 992px) {
 

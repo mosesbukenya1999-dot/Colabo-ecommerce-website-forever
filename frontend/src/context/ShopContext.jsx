@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const ShopContext = createContext();
 
@@ -14,18 +15,22 @@ const ShopContextProvider = (props) => {
     const [loading, setLoading] = useState(false); // new
     const [error, setError] = useState(null); // new
 
-    const addToCart = (itemId, sizes) => {
+    const [quantity, setQuantity] = useState(1);
+
+    const navigate= useNavigate()
+
+    const addToCart = (itemId, sizes, quantity = 1) => {
         if (!sizes) return alert("Please select a size!");
-
+    
         const cartData = structuredClone(cartItems);
-
+    
         if (cartData[itemId]) {
-            if (cartData[itemId][sizes]) cartData[itemId][sizes] += 1;
-            else cartData[itemId][sizes] = 1;
+            if (cartData[itemId][sizes]) cartData[itemId][sizes] += quantity;
+            else cartData[itemId][sizes] = quantity;
         } else {
-            cartData[itemId] = { [sizes]: 1 };
+            cartData[itemId] = { [sizes]: quantity };
         }
-
+    
         setCartItems(cartData);
     };
 
@@ -84,7 +89,8 @@ const ShopContextProvider = (props) => {
         getCartCount,
         loading, // new
         error,   // new
-        fetchProducts // in case you want retry button
+        fetchProducts, // in case you want retry button,
+        navigate
     };
 
     return (

@@ -25,7 +25,7 @@ const filters = [
 
 const QuikFilter = () => {
   return (
-    <div className=" filter-cards">
+    <div className=" filter-cards container">
       {filters.map((item, index) => (
         <div className="filter-card" key={index}>
           <div className="image-wrapper">
@@ -38,6 +38,7 @@ const QuikFilter = () => {
             <div className="overlay-content">
               <h5>{item.title}</h5>
               <p>{item.subtitle}</p>
+              <hr />
               <button className="overlay-btn">Shop Now</button>
             </div>
           </div>

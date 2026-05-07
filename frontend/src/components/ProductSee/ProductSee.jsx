@@ -43,10 +43,10 @@ const ProductSee = () => {
                 </div>
 
                 {/* SORT */}
-                <select onChange={(e) => setSortOption(e.target.value)} value={sortOption}>
-                    <option value="relevant">Relevant</option>
-                    <option value="low-high">Low - High</option>
-                    <option value="high-low">High - Low</option>
+                <select className=' sort' onChange={(e) => setSortOption(e.target.value)} value={sortOption}>
+                    <option value="relevant">Sort By: <span className='span-sorters text-danger'>Relevant</span></option>
+                    <option value="low-high">Sort By: <span className='span-sorters'>Low - High</span></option>
+                    <option value="high-low">Sort By: <span className='span-sorters'>High - Low</span></option>
                 </select>
             </div>
 

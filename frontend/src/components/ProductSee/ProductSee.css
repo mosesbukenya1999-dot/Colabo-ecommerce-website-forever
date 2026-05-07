@@ -62,11 +62,30 @@
     transition: all 0.3s ease;
 }
 
+@media (max-width: 760px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
 /* 📱 MOBILE → EXACTLY 2 CARDS */
 @media (max-width: 480px) {
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
+    }
+
+    .filter-buttons {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sort {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
     }
 }
 /* ProductSee.css */
@@ -117,3 +136,9 @@
     color: #777;
     font-size: 1.2rem;
 }
+
+.sort {
+    text-align: center;
+
+}
+

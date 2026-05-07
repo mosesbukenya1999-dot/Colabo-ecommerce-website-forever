@@ -16,7 +16,7 @@ const RelatedProducts = ({ category }) => {
 
             productCopy = productCopy.filter(item => item.category === category)
 
-            setRelated(productCopy.slice(0, 3))
+            setRelated(productCopy.slice(0, 4))
 
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -26,9 +26,9 @@ const RelatedProducts = ({ category }) => {
 
 <div className='related-sect vw-100'>
 <div className="container">
-   
+        <h1 className=' text-header'>Related Products</h1>
 
-    <div className="related-products">
+    <div className="products-grid">
         {related.map((item) => (
             <ProductItem
             key={item._id}
@@ -36,7 +36,7 @@ const RelatedProducts = ({ category }) => {
             name={item.name}
             price={item.price}
             category={item.category}
-            image={item.images}
+            images={item.images}
         />
         ))}
     </div>

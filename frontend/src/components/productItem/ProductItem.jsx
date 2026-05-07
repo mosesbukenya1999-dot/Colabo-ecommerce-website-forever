@@ -8,7 +8,7 @@ const ProductItem = ({ name, images = [], price, category, id ,delay = 0 }) => {
     const { currency } = useContext(ShopContext);
 
     return (
-        <Link  style={{ animationDelay: `${delay}ms` }} to={`/products/${id}`} 
+        <Link onClick={()=> window.scrollTo(0,0)}  style={{ animationDelay: `${delay}ms` }} to={`/products/${id}`} 
         className='card-container fade-in'>
 
             {/* IMAGE */}

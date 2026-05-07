@@ -30,7 +30,7 @@ const AppNavbar = () => {
 
         {/* BRAND */}
         <BSNavbar.Brand className="fw-bold text-black">
-          COZA <span className="text-secondary fw-medium">STORE</span>
+          COZA <span className=" fw-medium store-text">STORE</span>
         </BSNavbar.Brand>
 
         {/* TOGGLE */}
