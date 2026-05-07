@@ -1,78 +1,125 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
+import { useNavigate } from 'react-router-dom';
+import "./CSS/cart.css";
 
 const Cart = () => {
+    const { cartItems, products, currency,updateQuantity } = useContext(ShopContext);
+    const navigate = useNavigate(); // useNavigate hook
+    const [cartData, setCartData] = useState([]);
+    const [loading, setLoading] = useState(false); // page loading state
 
-    const {cartItems, products,currency} = useContext(ShopContext);
-
-    const [cartData,setCartData] = useState([]);
-
-    useEffect(()=>{
-
-      let tempData =[];
-
-      if (products.length>0) {
-        for(const productId in cartItems){
-          for(const sizes in cartItems[productId]){
-            try {
-              tempData.push({
-                _id: productId,
-                sizes: sizes,
-                quantity: cartItems[productId][sizes]
-              })
-            } catch (error) {
-              
+    useEffect(() => {
+        let tempData = [];
+        if (products.length > 0) {
+            for (const productId in cartItems) {
+                for (const size in cartItems[productId]) {
+                    try {
+                        tempData.push({
+                            _id: productId,
+                            size: size,
+                            quantity: cartItems[productId][size]
+                        });
+                    } catch (error) {}
+                }
             }
-          }
-      }
-      }
+        }
+        setCartData(tempData);
+    }, [cartItems, products]);
 
-      setCartData(tempData);
+    const goBack = () => {
+        setLoading(true);
+        setTimeout(() => {
+            if (window.history.length > 1) {
+                navigate(-1); // go back in history
+            } else {
+                navigate("/"); // fallback to home page
+            }
+        }, 500); // 0.5s delay for smooth effect
+    };
 
-    },[cartItems,products])
-
-  return (
-    <div style={{marginTop:"170px"}} className=' container cart-sect'>
-        <div className="row">
-          <div className="col-8">
-            <div style={{gridTemplateColumns:"1fr 1fr 1fr 1fr 1fr 1fr"}} className="d-grid">
-                <b>Image</b>
-                <b>Product Name</b>
-                <b>Quantity</b>
-                <b>Unit Price</b>
-                <b>Total</b>
-                <b>Remove</b>
+    if (loading) {
+        // Optional: show a simple loader while waiting
+        return (
+            <div className="loader-container">
+                <div className="loader"></div>
             </div>
-            {
-                cartData.map((item,index)=> {
-                  const productData = products.find((product)=> product._id===item._id);
-                  console.log(productData);
+        );
+    }
 
-                  return (
-                    <div key={index}>
-                        <div style={{gridTemplateColumns:"1fr 1fr 1fr 1fr 1fr 1fr"}} className="d-grid">
-                          <img style={{width:"100px"}} src={productData.images[0]} alt="" />
-                          <p>{productData.name}</p>
-                          <input value={item.quantity} min={1} type="number" />
-                          <div className="d-flex gap-2">
-                              <p>{currency}{productData.price} x {item.quantity}</p>
-                          </div>
-                          <p>{currency}{100.00}</p>
-                          <p>x</p>
+    return (
+        <div>
+            <div className="breadcrum-icon">
+                <button className="btn-back" onClick={goBack}>
+                    <i className="bi bi-chevron-left me-1"></i>Back
+                </button>
+            </div>
+
+            <div className='cart-page'>
+                <div className='cart-sect'>
+                    <div className="cart-content">
+                        <div className="cart-items">
+                            <div className="d-grid grid-header">
+                                <b>Image</b>
+                                <b>Product Name</b>
+                                <b>Quantity</b>
+                                <b>Unit Price</b>
+                                <b>Total</b>
+                                <b>Remove</b>
+                            </div>
+
+                            {cartData.map((item, index) => {
+                                const productData = products.find(p => p._id === item._id);
+                                if (!productData) return null;
+                                return (
+                                    <div key={index} className="d-grid cart-row">
+                                        <img src={productData.images[0]} alt="" />
+                                        <p>{productData.name}</p>
+                                        <input 
+  type="number" 
+  min={0} 
+  value={item.quantity} 
+  onChange={(e) => {
+    const value = Number(e.target.value);
+    if (value === 0) {
+      updateQuantity(item._id, item.size, 0); // remove item
+    } else if (!isNaN(value)) {
+      updateQuantity(item._id, item.size, value);
+    }
+  }}
+/>
+                                        <p>{currency}{productData.price}</p>
+                                        <p>{currency}{(productData.price * item.quantity).toFixed(2)}</p>
+                                        <p onClick={()=> updateQuantity(item._id,item.size,0)} className="remove-btn"><i className="bi bi-trash"></i></p>
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        <div className="cart-summary">
+                            <h3>Summary</h3>
+                            <p>
+                                Subtotal <span>{currency}{cartData.reduce((acc, item) => {
+                                    const product = products.find(p => p._id === item._id);
+                                    return acc + (product?.price || 0) * item.quantity;
+                                }, 0).toFixed(2)}</span>
+                            </p>
+                            <p>
+                                Shipping <span>Free</span>
+                            </p>
+                            <p>
+                                Total <span>{currency}{cartData.reduce((acc, item) => {
+                                    const product = products.find(p => p._id === item._id);
+                                    return acc + (product?.price || 0) * item.quantity;
+                                }, 0).toFixed(2)}</span>
+                            </p>
+                            <button className="checkout-btn">Proceed to Checkout</button>
                         </div>
                     </div>
-                  )
-
-                })
-              }
-          </div>
-
-          <div className="col-4">
-              
-          </div>
+                </div>
+            </div>
         </div>
-    </div>
-  )
+    );
 }
 
-export default Cart
+export default Cart;

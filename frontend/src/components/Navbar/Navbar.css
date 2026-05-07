@@ -167,6 +167,10 @@
     display: inline-block;
   }
 
+  .hot-badge {
+    width: 40px;
+  }
+
   .nav-actions {
     justify-content: space-between;
     width: 100%;

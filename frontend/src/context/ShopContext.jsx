@@ -46,7 +46,19 @@ const ShopContextProvider = (props) => {
 
     const updateQuantity = (itemId, sizes, quantity) => {
         const cartData = structuredClone(cartItems);
-        cartData[itemId][sizes] = quantity;
+    
+        if (quantity <= 0) {
+            if (cartData[itemId]) {
+                delete cartData[itemId][sizes];
+                // remove the product if no sizes left
+                if (Object.keys(cartData[itemId]).length === 0) {
+                    delete cartData[itemId];
+                }
+            }
+        } else {
+            cartData[itemId][sizes] = quantity;
+        }
+    
         setCartItems(cartData);
     };
 
