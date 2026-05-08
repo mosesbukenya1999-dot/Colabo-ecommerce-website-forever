@@ -70,7 +70,7 @@ const addToCart = (itemId, sizes) => {
     };
 
     const getCartAmount = ()=> {
-        const amount = 0;
+        let amount = 0;
 
         for (const items in cartItems){
             for (const item in cartItems[items]){
