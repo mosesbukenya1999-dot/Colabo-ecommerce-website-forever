@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Placeorder.css";
+import "./newPlacer.css";
 import CartTotal from "../CartTotal/CartTotal";
 
 const PlaceOrder = () => {
