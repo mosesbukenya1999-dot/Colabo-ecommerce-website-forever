@@ -80,6 +80,7 @@ const Cart = () => {
                       type="number"
                       min={0}
                       value={item.quantity}
+                      className=" qty-input"
                       onChange={(e) => {
                         const value = Number(e.target.value);
                         if (value === 0) {
@@ -90,11 +91,11 @@ const Cart = () => {
                       }}
                     />
                     <p>
-                      {currency}
-                      {productData.price}
+                      {item.size}
                     </p>
                     <p>
-                      {item.size}
+                      {currency}
+                      {productData.price}
                     </p>
                     <p
                       onClick={() => updateQuantity(item._id, item.size, 0)}
@@ -136,7 +137,7 @@ const Cart = () => {
                     .toFixed(2)}
                 </span>
               </p>
-              <button className="checkout-btn">Proceed to Checkout</button>
+              <button onClick={()=> navigate("/place-order")} className="checkout-btn">Proceed to Checkout</button>
             </div>
           </div>
         </div>

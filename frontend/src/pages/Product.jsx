@@ -30,6 +30,12 @@ const Product = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (!pageLoading) {
+      window.scrollTo(0, 0);
+    }
+  }, [pageLoading]);
+
   // Fetch product info from products array
   useEffect(() => {
     if (products.length === 0) return;

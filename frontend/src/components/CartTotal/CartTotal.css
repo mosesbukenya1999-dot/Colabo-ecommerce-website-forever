@@ -1,0 +1,9 @@
+.cart-total {
+    max-width: 400px;
+    margin-right: 120px;
+    padding: 25px 20px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}

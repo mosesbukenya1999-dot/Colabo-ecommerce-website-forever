@@ -11,6 +11,7 @@ import Blog from './pages/Blog'
 import Login from './pages/Login'
 import TopBar from './components/Topbar/TopBar'
 import Footer from './components/Footer/Footer'
+import PlaceOrder from './components/PlaceOrder/PlaceOrder'
 
 const App = () => {
   return (
@@ -24,7 +25,8 @@ const App = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/products/:productId' element={<Product/>}/>
-        <Route path='/' element={<Blog/>}/>
+        <Route path='/blog' element={<Blog/>}/>
+        <Route path='/place-order' element={<PlaceOrder/>}/>
       </Routes>
       <Footer/>
     </div>

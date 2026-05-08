@@ -69,6 +69,26 @@ const addToCart = (itemId, sizes) => {
         }, 0);
     };
 
+    const getCartAmount = ()=> {
+        const amount = 0;
+
+        for (const items in cartItems){
+            for (const item in cartItems[items]){
+                if (cartItems[items][item]) {
+                    const itemInfo = products.find((product)=> product._id === items);
+                    if (itemInfo) {
+                        amount+= itemInfo.price * cartItems[items][item]
+                    }else{
+                        alert("No Product Is Found for Price")
+                    }
+                }
+            }
+        }
+
+        return amount;
+
+    }
+
     // ----- PRODUCTS FUNCTIONS -----
 
     const fetchProducts = async () => {
@@ -110,7 +130,8 @@ const addToCart = (itemId, sizes) => {
         loading,
         error,
         fetchProducts,
-        navigate
+        navigate,
+        getCartAmount,
     };
 
     return (
