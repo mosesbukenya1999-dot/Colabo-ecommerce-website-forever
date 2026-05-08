@@ -19,8 +19,7 @@ const Product = () => {
 
   const [productData, setProductData] = useState(null);
   const [image, setImage] = useState("");
-  const [size, setSize] = useState("");
-  const [quantity, setQuantity] = useState(1);
+  const [sizes, setSizes] = useState("");
   const [pageLoading, setPageLoading] = useState(true);
 
   // Simulate 2-second loader when page first appears
@@ -48,13 +47,13 @@ const Product = () => {
   }, [products, productId]);
 
   // Sync quantity with cart for selected size
-  useEffect(() => {
+  /* useEffect(() => {
     if (size && cartItems[productId]?.[size]) {
       setQuantity(cartItems[productId][size]);
     } else {
       setQuantity(1);
     }
-  }, [cartItems, productId, size]);
+  }, [cartItems, productId, size]); */
 
   // Go back handler with small loader (optional)
   const goBack = () => {
@@ -150,8 +149,8 @@ const Product = () => {
               {productData.sizes.map((item, index) => (
                 <button
                   key={index}
-                  onClick={() => setSize(item)}
-                  className={size === item ? "active" : ""}
+                  onClick={() => setSizes(item)}
+                  className={sizes === item ? "active" : ""}
                 >
                   {item}
                 </button>
@@ -161,7 +160,7 @@ const Product = () => {
 
           {/* Actions */}
           <div className="actions border-bottom py-3">
-            <div className="qty fw-bold d-flex align-items-center">
+            {/* <div className="qty fw-bold d-flex align-items-center">
               <button
                 className="btn-qty"
                 onClick={() => {
@@ -183,10 +182,10 @@ const Product = () => {
               >
                 +
               </button>
-            </div>
+            </div> */}
 
             <button
-              onClick={() => addToCart(productId, size, quantity)}
+              onClick={() => addToCart(productData._id, sizes)}
               className="add-cart"
             >
               <i className="bi bi-cart me-2"></i>Add to Cart

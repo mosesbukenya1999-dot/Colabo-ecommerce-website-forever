@@ -6,73 +6,80 @@ export const ShopContext = createContext();
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-const ShopContextProvider = (props) => {
+const ShopContextProvider = ({ children }) => {
     const currency = '$';
     const delivery_fee = 10;
 
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(false); // new
-    const [error, setError] = useState(null); // new
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const [quantity, setQuantity] = useState(1);
+    const navigate = useNavigate();
 
-    const navigate= useNavigate()
+    // ----- CART FUNCTIONS -----
 
-    const addToCart = (itemId, sizes, quantity = 1) => {
-        if (!sizes) return alert("Please select a size!");
-    
-        const cartData = structuredClone(cartItems);
-    
-        if (cartData[itemId]) {
-            if (cartData[itemId][sizes]) cartData[itemId][sizes] += quantity;
-            else cartData[itemId][sizes] = quantity;
+    // Add product to cart (increment by quantity)
+    // Add product to cart (safe, prevents doubling)
+const addToCart = (itemId, sizes) => {
+    if (!sizes) return alert("Please select a size!");
+
+    const cartData = structuredClone(cartItems);
+
+    if (cartData[itemId]) {
+        if (cartData[itemId][sizes]>0) {
+            cartData[itemId][sizes]+=1
         } else {
-            cartData[itemId] = { [sizes]: quantity };
+            cartData[itemId][sizes]=1;
         }
-    
-        setCartItems(cartData);
-    };
+    }else{
+        cartData[itemId]={};
+        cartData[itemId][sizes]=1
+    }
 
-    const getCartCount = () => {
-        let cartCount = 0;
-        for (const items in cartItems) {
-            for (const item in cartItems[items]) {
-                cartCount += cartItems[items][item];
-            }
-        }
-        return cartCount;
-    };
-
-    const updateQuantity = (itemId, sizes, quantity) => {
-        const cartData = structuredClone(cartItems);
+    setCartItems(cartData)
     
-        if (quantity <= 0) {
-            if (cartData[itemId]) {
-                delete cartData[itemId][sizes];
-                // remove the product if no sizes left
-                if (Object.keys(cartData[itemId]).length === 0) {
-                    delete cartData[itemId];
+};
+
+    // Update quantity or remove item if quantity <= 0
+    const updateQuantity = (itemId, size, quantity) => {
+        setCartItems(prev => {
+            const cartData = structuredClone(prev);
+
+            if (quantity <= 0) {
+                if (cartData[itemId]) {
+                    delete cartData[itemId][size];
+                    if (Object.keys(cartData[itemId]).length === 0) {
+                        delete cartData[itemId];
+                    }
                 }
+            } else {
+                if (!cartData[itemId]) cartData[itemId] = {};
+                cartData[itemId][size] = quantity;
             }
-        } else {
-            cartData[itemId][sizes] = quantity;
-        }
-    
-        setCartItems(cartData);
+
+            return cartData;
+        });
     };
 
-    
+    // Get total number of items in cart
+    const getCartCount = () => {
+        return Object.values(cartItems).reduce((total, sizes) => {
+            return total + Object.values(sizes).reduce((sum, qty) => sum + qty, 0);
+        }, 0);
+    };
+
+    // ----- PRODUCTS FUNCTIONS -----
 
     const fetchProducts = async () => {
         setLoading(true);
         setError(null);
-    
+
         try {
-            const res = await axios.get(backendUrl + "/api/products/list", {
+            const res = await axios.get(`${backendUrl}/api/products/list`, {
                 headers: { 'Cache-Control': 'no-cache' }
             });
-            setProducts(res.data.products);
+            setProducts(res.data.products || []);
         } catch (err) {
             console.error(err);
             if (!err.response) {
@@ -89,25 +96,26 @@ const ShopContextProvider = (props) => {
         fetchProducts();
     }, []);
 
+    // ----- CONTEXT VALUE -----
     const value = {
         products,
         currency,
         delivery_fee,
         backendUrl,
-        addToCart,
         cartItems,
         setCartItems,
+        addToCart,
         updateQuantity,
         getCartCount,
-        loading, // new
-        error,   // new
-        fetchProducts, // in case you want retry button,
+        loading,
+        error,
+        fetchProducts,
         navigate
     };
 
     return (
         <ShopContext.Provider value={value}>
-            {props.children}
+            {children}
         </ShopContext.Provider>
     );
 };

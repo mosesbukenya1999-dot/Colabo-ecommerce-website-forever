@@ -10,6 +10,7 @@ import Product from './pages/Product'
 import Blog from './pages/Blog'
 import Login from './pages/Login'
 import TopBar from './components/Topbar/TopBar'
+import Footer from './components/Footer/Footer'
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path='/products/:productId' element={<Product/>}/>
         <Route path='/' element={<Blog/>}/>
       </Routes>
+      <Footer/>
     </div>
   )
 }
