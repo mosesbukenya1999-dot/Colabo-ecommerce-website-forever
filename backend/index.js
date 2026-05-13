@@ -5,6 +5,7 @@ import "dotenv/config";
 
 import connectDB from "./config/mongoDB.js";
 import productRouter from "./routers/productRouter.js";
+import userRouter from "./routers/userRouter.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -22,6 +23,7 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads"))); */
 
 // routes
 app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
 
 // test route
 app.get("/", (req, res) => {
