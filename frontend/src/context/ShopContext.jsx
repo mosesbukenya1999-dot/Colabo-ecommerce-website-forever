@@ -23,7 +23,7 @@ const ShopContextProvider = ({ children }) => {
 
     // Add product to cart (increment by quantity)
     // Add product to cart (safe, prevents doubling)
-const addToCart = (itemId, sizes) => {
+const addToCart = async(itemId, sizes) => {
     if (!sizes) return alert("Please select a size!");
 
     const cartData = structuredClone(cartItems);
@@ -39,7 +39,16 @@ const addToCart = (itemId, sizes) => {
         cartData[itemId][sizes]=1
     }
 
-    setCartItems(cartData)
+    setCartItems(cartData);
+
+    if (token) {
+        try {
+            const res = await axios.post(backendUrl+ "/api/cart/add", {itemId,sizes});
+            console.log(res.data);
+        } catch (error) {
+            
+        }
+    }
     
 };
 

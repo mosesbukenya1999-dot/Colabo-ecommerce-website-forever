@@ -41,15 +41,16 @@ const AppNavbar = () => {
         </BSNavbar.Brand>
 
         {/* CART */}
-        <NavLink to="/cart" className="cart-container" onClick={closeMenu}>
+        <NavLink to="/cart" className="cart-container d-md-none" onClick={closeMenu}>
               <Cart className="nav-icon text-secondary" />
-              <p className="text-secondary">{getCartCount()}</p>
+              <p className="">{getCartCount()}</p>
         </NavLink>
 
         {/* TOGGLE */}
         <BSNavbar.Toggle
           aria-controls="main-nav"
           onClick={() => setExpanded(!expanded)}
+          className="hamburger"
         />
 
         <BSNavbar.Collapse id="main-nav">

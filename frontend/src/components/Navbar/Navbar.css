@@ -18,6 +18,10 @@
   transition: all 0.4s ease;
 }
 
+.hamburger {
+  border: none;
+}
+
 /* SCROLL EFFECT */
 .custom-navbar.scrolled {
   transform: translateX(-50%) scale(0.95);
