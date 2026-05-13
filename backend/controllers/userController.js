@@ -7,46 +7,75 @@ const createToken = (id)=>{
     return jwt.sign({id}, process.env.JWT_SECRET);
 }
 
-const registerUser = async (req,res)=>{
+const registerUser = async (req, res) => {
     try {
-        
-        const {name,email,password} = req.body;
 
-        const exists = await userModel.findOne({email});
+        const { name, email, password } = req.body;
+
+        // Check missing fields
+        if (!name || !email || !password) {
+            return res.json({
+                success: false,
+                message: "All fields are required"
+            });
+        }
+
+        // Check existing user
+        const exists = await userModel.findOne({ email });
 
         if (exists) {
-            return res.json({success:false,message:"User Exists with same Email Id"})
+            return res.json({
+                success: false,
+                message: "User already exists"
+            });
         }
 
+        // Validate email
         if (!validator.isEmail(email)) {
-            return res.json({success:false,message:"User Exists with same Email Id"})
+            return res.json({
+                success: false,
+                message: "Please enter a valid email"
+            });
         }
 
+        // Password validation
         if (password.length < 8) {
-            return res.json({success:"false",message:"Use a strong Password"})
+            return res.json({
+                success: false,
+                message: "Use a strong password"
+            });
         }
 
+        // Hash password
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password,salt);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-        const userData = {
+        // Save user
+        const newUser = new userModel({
             name,
             email,
-            password: hashedPassword,
-        }
+            password: hashedPassword
+        });
 
-        const newUser = new userModel(userData);
         const user = await newUser.save();
 
+        // Create token
         const token = createToken(user._id);
 
-        res.json({success:true, token})
+        res.json({
+            success: true,
+            token
+        });
 
     } catch (error) {
         console.log(error);
-        res.json({success:false,message:error.message})
+
+        res.json({
+            success: false,
+            message: error.message
+        });
     }
-}
+};
 
 const loginUser = async (req,res)=>{
     try {
