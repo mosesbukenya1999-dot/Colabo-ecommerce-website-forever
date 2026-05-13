@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./CSS/cart.css";
 
 const Cart = () => {
-  const { cartItems, products, currency, updateQuantity } =
+  const { cartItems, products, currency, updateQuantity, updatingItems} =
     useContext(ShopContext);
   const navigate = useNavigate(); // useNavigate hook
   const [cartData, setCartData] = useState([]);
@@ -62,7 +62,7 @@ const Cart = () => {
             <div className="cart-items">
               <div className="d-grid grid-header">
                 <b>Image</b>
-                <b>Product Name</b>
+                <b>Name</b>
                 <b>Quantity</b>
                 <b>Size</b>
                 <b>Total</b>
@@ -77,19 +77,18 @@ const Cart = () => {
                     <img src={productData.images[0]} alt="" />
                     <p>{productData.name}</p>
                     <input
-                      type="number"
-                      min={0}
-                      value={item.quantity}
-                      className=" qty-input"
-                      onChange={(e) => {
-                        const value = Number(e.target.value);
-                        if (value === 0) {
-                          updateQuantity(item._id, item.size, 0); // remove item
-                        } else if (!isNaN(value)) {
-                          updateQuantity(item._id, item.size, value);
-                        }
-                      }}
-                    />
+  type="number"
+  min={0}
+  value={item.quantity}
+  className="qty-input"
+  disabled={updatingItems[`${item._id}_${item.size}`]} // disable while updating
+  onChange={(e) => {
+    const value = Number(e.target.value);
+    if (!isNaN(value)) {
+      updateQuantity(item._id, item.size, value);
+    }
+  }}
+/>
                     <p>
                       {item.size}
                     </p>

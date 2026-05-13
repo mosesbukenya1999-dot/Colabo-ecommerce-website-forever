@@ -13,7 +13,7 @@ const Product = () => {
     addToCart,
     updateQuantity,
     cartItems,
-    navigate,
+    navigate,cartLoading,
     error: contextError,
   } = useContext(ShopContext);
 
@@ -190,12 +190,18 @@ const Product = () => {
               </button>
             </div> */}
 
-            <button
-              onClick={() => addToCart(productData._id, sizes)}
-              className="add-cart"
-            >
-              <i className="bi bi-cart me-2"></i>Add to Cart
-            </button>
+<button
+    onClick={() => addToCart(productData._id, sizes)}
+    className="add-cart"
+    disabled={cartLoading} // disable button while loading
+>
+    {cartLoading ? (
+        <span className="spinner-border spinner-border-sm me-2"></span>
+    ) : (
+        <i className="bi bi-cart me-2"></i>
+    )}
+    Add to Cart
+</button>
 
             <div className="whish-list-icon">
               <i className="bi bi-bookmark"></i>
