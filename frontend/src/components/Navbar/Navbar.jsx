@@ -9,7 +9,14 @@ const AppNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
-  const { getCartCount } = useContext(ShopContext);
+  const { getCartCount,token,setToken,setCartItems,navigate } = useContext(ShopContext);
+
+  const logout = ()=> {
+    navigate("/login")
+    localStorage.removeItem("token")
+    setToken("");
+    setCartItems({});
+  }
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -32,6 +39,12 @@ const AppNavbar = () => {
         <BSNavbar.Brand className="fw-bold text-black">
           COZA <span className=" fw-medium store-text">STORE</span>
         </BSNavbar.Brand>
+
+        {/* CART */}
+        <NavLink to="/cart" className="cart-container" onClick={closeMenu}>
+              <Cart className="nav-icon text-secondary" />
+              <p className="text-secondary">{getCartCount()}</p>
+        </NavLink>
 
         {/* TOGGLE */}
         <BSNavbar.Toggle
@@ -89,6 +102,9 @@ const AppNavbar = () => {
             <Heart className="nav-icon" />
 
             {/* 🔐 LOGIN (ONLY MOBILE) */}
+
+              {
+                token=== ""? 
             <NavLink
               to="/login"
               className="mobile-login-btn d-lg-none"
@@ -96,6 +112,17 @@ const AppNavbar = () => {
             >
               Login
             </NavLink>
+                : (
+                  <NavLink
+              to="/login"
+              className="mobile-login-btn d-lg-none"
+              onClick={logout}
+            >
+              Logout
+            </NavLink>
+                )
+              }
+
 
           </div>
 

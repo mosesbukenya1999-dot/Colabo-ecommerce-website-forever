@@ -44,9 +44,9 @@ const ProductSee = () => {
 
                 {/* SORT */}
                 <select className=' sort' onChange={(e) => setSortOption(e.target.value)} value={sortOption}>
-                    <option value="relevant">Sort By: <span className='span-sorters text-danger'>Relevant</span></option>
-                    <option value="low-high">Sort By: <span className='span-sorters'>Low - High</span></option>
-                    <option value="high-low">Sort By: <span className='span-sorters'>High - Low</span></option>
+                    <option value="relevant">Sort By:Relevant</option>
+                    <option value="low-high">Sort By: Low - High</option>
+                    <option value="high-low">Sort By: High - Low</option>
                 </select>
             </div>
 

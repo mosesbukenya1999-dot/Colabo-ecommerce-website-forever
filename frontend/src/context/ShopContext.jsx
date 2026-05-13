@@ -15,6 +15,8 @@ const ShopContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    const [token,setToken] = useState("")
+
     const navigate = useNavigate();
 
     // ----- CART FUNCTIONS -----
@@ -116,6 +118,12 @@ const addToCart = (itemId, sizes) => {
         fetchProducts();
     }, []);
 
+    useEffect(()=> {
+        if (!token && localStorage.getItem("token")) {
+            setToken(localStorage.getItem("token"))
+        }
+    },[])
+
     // ----- CONTEXT VALUE -----
     const value = {
         products,
@@ -132,6 +140,7 @@ const addToCart = (itemId, sizes) => {
         fetchProducts,
         navigate,
         getCartAmount,
+        token,setToken
     };
 
     return (
