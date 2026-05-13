@@ -1,0 +1,29 @@
+/* components/breadcrumb.css */
+.breadcrumb-container {
+    padding: 10px 20px;
+    background: #f5f5f5;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 4%;
+  }
+  
+  .breadcrumb-prev {
+    cursor: pointer;
+    color: rgb(233, 145, 145);
+  }
+  
+  .breadcrumb-separator {
+    margin: 0 5px;
+  }
+  
+  .breadcrumb-current {
+    font-weight: bold;
+  }
+
+  @media (max-width: 480px) {
+    .breadcrumb-container {
+        margin-top: 17%;
+    }
+   }
