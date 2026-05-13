@@ -1,6 +1,6 @@
 // components/Breadcrumb.jsx
 import React, { useContext } from "react";
-import "./breadcrumb.css";
+import "./Breadcrumb.css";
 import { BreadcrumbContext } from "../../context/BreadcrumbContext";
 
 const Breadcrumb = () => {
