@@ -63,7 +63,7 @@ const updateStatus = async(req,res)=> {
 const userOrders = async(req,res)=> {
     try {
         const userId = req.user.id;
-        const orders = await orderModel.findBy(userId);
+        const orders = await orderModel.find({userId});
 
         res.json({success:true, orders})
 
