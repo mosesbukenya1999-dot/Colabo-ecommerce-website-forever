@@ -6,7 +6,7 @@ const orderRouter = express.Router();
 
 orderRouter.post("/placeorder", userAuth,placeOrder);
 orderRouter.post("/stripe", userAuth,placeOrderStripe);
-orderRouter.post("/razorpay", userAuth,placeOrderRazorpay);
+orderRouter.post("/razorpay", userAuth,placeOrderRazorpay); 
 
 orderRouter.post("/userorders", userAuth,userOrders);
 
