@@ -4,9 +4,15 @@ import "./newPlacer.css";
 import CartTotal from "../CartTotal/CartTotal";
 import { ShopContext } from "../../context/ShopContext";
 
-
 import { FaPaypal, FaStripe, FaMoneyBillWave } from "react-icons/fa";
 import axios from "axios";
+
+const Loader = () => (
+  <div className="loader-overlay">
+    <div className="loader"></div>
+    <p className="loader-text">Placing your order...</p>
+  </div>
+);
 
 const PlaceOrder = () => {
   const navigate = useNavigate();
@@ -17,6 +23,7 @@ const PlaceOrder = () => {
     cartItems,
     getCartAmount,
     delivery_fee,
+    products,
   } = useContext(ShopContext);
 
   const [form, setForm] = useState({
@@ -39,57 +46,49 @@ const PlaceOrder = () => {
   };
 
   const handlePlaceOrder = async () => {
-    if (placingOrder) return;
-
-    // Validate form
-    for (const key in form) {
-      if (!form[key]) {
-        alert(`Please fill your ${key}`);
-        return;
-      }
-    }
-
-    if (Object.keys(cartItems).length === 0) {
-      alert("Your cart is empty!");
-      return;
-    }
-
-    setPlacingOrder(true);
-
     try {
-      // Prepare order items
-      const orderItems = [];
-      for (const productId in cartItems) {
-        for (const size in cartItems[productId]) {
-          orderItems.push({
-            productId,
-            size,
-            quantity: cartItems[productId][size],
-          });
+      setPlacingOrder(true);
+
+      let orderItems = [];
+
+      for (const items in cartItems) {
+        for (const item in cartItems[items]) {
+          let itemInfo = structuredClone(
+            products.find((product) => product._id === items)
+          );
+
+          if (itemInfo) {
+            itemInfo.size = item;
+            itemInfo.quantity = cartItems[items][item];
+            orderItems.push(itemInfo);
+          }
         }
       }
 
-      const orderData = {
+      let orderData = {
         address: form,
-        items: orderItems,
         amount: getCartAmount() + delivery_fee,
+        items: orderItems,
       };
 
       switch (paymentMethod) {
         case "cod":
-            const res = await axios.post(backendUrl+ "/api/orders/placeorder", orderData, {headers:{token}});
-            if (res.data.success) {
-              setCartItems({});
-              navigate("/orders")
-            }else{
-              alert(res.data.message)
-            }
+          const res = await axios.post(
+            backendUrl + "/api/orders/placeorder",
+            orderData,
+            { headers: { token } }
+          );
+          if (res.data.success) {
+            setCartItems({});
+            navigate("/orders");
+          } else {
+            alert(res.data.message);
+          }
           break;
-      
+
         default:
           break;
       }
-      
     } catch (error) {
       console.error(error);
       alert("Something went wrong while placing the order.");
@@ -100,6 +99,9 @@ const PlaceOrder = () => {
 
   return (
     <div className="real-container-two mt-5 py-5">
+      {/* Loader Overlay */}
+      {placingOrder && <Loader />}
+
       <div className="placeorder-container">
         <h2 className="page-title">Place Your Order</h2>
 
@@ -130,17 +132,19 @@ const PlaceOrder = () => {
             <h4>Payment Method</h4>
 
             <label
-  className={`payment-option ${paymentMethod === "cod" ? "selected" : ""}`}
->
-  <input
-    type="radio"
-    name="payment"
-    value="cod"
-    checked={paymentMethod === "cod"}
-    onChange={() => setPaymentMethod("cod")}
-  />
-  <FaMoneyBillWave size={20} className="me-2" /> Cash on Delivery
-</label>
+              className={`payment-option ${
+                paymentMethod === "cod" ? "selected" : ""
+              }`}
+            >
+              <input
+                type="radio"
+                name="payment"
+                value="cod"
+                checked={paymentMethod === "cod"}
+                onChange={() => setPaymentMethod("cod")}
+              />
+              <FaMoneyBillWave size={20} className="me-2" /> Cash on Delivery
+            </label>
 
             <label
               className={`payment-option ${

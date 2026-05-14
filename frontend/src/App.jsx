@@ -13,6 +13,7 @@ import TopBar from './components/Topbar/TopBar'
 import Footer from './components/Footer/Footer'
 import PlaceOrder from './components/PlaceOrder/PlaceOrder'
 import Breadcrumb from './components/BreadCrumb/Breadcrumb'
+import Orders from './pages/Orders'
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path='/products/:productId' element={<Product/>}/>
         <Route path='/blog' element={<Blog/>}/>
         <Route path='/place-order' element={<PlaceOrder/>}/>
+        <Route path='/orders' element={<Orders/>}/>
       </Routes>
       <Footer/>
     </div>
