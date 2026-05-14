@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import "./ReviewSection.css";
 
 const ReviewsSection = () => {
-  const { token, backendUrl } = useContext(ShopContext);
+  const { token, backendUrl, navigate } = useContext(ShopContext);
   const { productId } = useParams();
 
   const [reviews, setReviews] = useState([]);
@@ -100,31 +100,47 @@ const ReviewsSection = () => {
 
       {/* Reviews List */}
       <div className="reviews-list">
-        {reviews.length === 0 ? (
-          <p>No reviews yet. Be the first!</p>
-        ) : (
-          reviews
-            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-            .map((r) => (
-              <div key={r._id} className="review-card">
-                <div className="review-header">
-                  <span className="review-user">{r.userName}</span>
-                  <span className="review-date">
-                    {new Date(r.createdAt).toLocaleDateString()}
-                  </span>
-                </div>
-                <div className="review-rating">
-  {[1, 2, 3, 4, 5].map((i) => (
-    <i
-      key={i}
-      className={`bi ${i <= Number(r.rating) ? "bi-star-fill filled" : "bi-star"}`}
-    ></i>
-  ))}
+
+                    {
+                        token=== ""? 
+                        (
+                            <>
+                            <p>Please Login to submit Review!!!</p>
+                            <button onClick={()=> navigate("/login")} className="btn btn-danger">Login</button>
+                            </>
+                        ):
+                        (
+                            <>
+
+{reviews.length === 0 ? (
+  <p>No reviews yet. Be the first!</p>
+) : (
+  reviews
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .map((r) => (
+      <div key={r._id} className="review-card">
+        <div className="review-header">
+          <span className="review-user">{r.userName}</span>
+          <span className="review-date">
+            {new Date(r.createdAt).toLocaleDateString()}
+          </span>
+        </div>
+        <div className="review-rating">
+{[1, 2, 3, 4, 5].map((i) => (
+<i
+key={i}
+className={`bi ${i <= Number(r.rating) ? "bi-star-fill filled" : "bi-star"}`}
+></i>
+))}
 </div>
-                <p className="review-text">{r.text}</p>
-              </div>
-            ))
-        )}
+        <p className="review-text">{r.text}</p>
+      </div>
+    ))
+)}
+                            </>
+                        )
+                    }
+
       </div>
     </div>
   );
