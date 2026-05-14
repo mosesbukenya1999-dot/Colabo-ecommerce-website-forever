@@ -1,0 +1,124 @@
+.reviews-section {
+    margin-top: 40px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  }
+  
+  .reviews-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Form */
+  .review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+  
+  .review-form .star-input {
+    display: flex;
+    gap: 5px;
+    font-size: 20px;
+    color: #ccc;
+  }
+  
+  .review-form .star-input i.filled {
+    color: #ff4d6d;
+    transform: scale(1.2);
+    transition: transform 0.2s;
+  }
+  
+  .review-form textarea {
+    resize: none;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    min-height: 80px;
+    font-family: inherit;
+    font-size: 14px;
+  }
+  
+  .review-form button {
+    align-self: flex-start;
+    background: #ff4d6d;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .review-form button:hover {
+    background: #e6003c;
+  }
+  
+  .review-form .error {
+    color: red;
+    font-size: 13px;
+  }
+  
+  /* Reviews List */
+  .reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .review-card {
+    padding: 15px 18px;
+    border-radius: 10px;
+    background: #f9f9f9;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .review-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+  
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .review-rating i {
+    font-size: 16px;
+    color: #ffb74d;
+    margin-right: 2px;
+  }
+  
+  .review-text {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 6px;
+    color: #333;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .reviews-section {
+      padding: 15px;
+    }
+    .review-form textarea {
+      min-height: 60px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .review-card {
+      padding: 12px;
+    }
+    .review-form button {
+      padding: 6px 14px;
+      font-size: 14px;
+    }
+  }

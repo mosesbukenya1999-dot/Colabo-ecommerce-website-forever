@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import "./ViewStatusSect.css";
 import { ShopContext } from '../../context/ShopContext';
 import { useParams } from 'react-router-dom';
+import ReviewsSection from '../ReviewSection/ReviewSection';
 
 const ViewStatusSect = () => {
 
@@ -48,7 +49,7 @@ const ViewStatusSect = () => {
   <div className="tab-content">
     {status === "Description" && <p>{productData.description}</p>}
     {status === "Specification" && <p>Specification will be here</p>}
-    {status === "Reviews" && <p>Reviews will be here</p>}
+    {status === "Reviews" && <p>{<ReviewsSection/>}</p>}
   </div>
 </div>
   )
