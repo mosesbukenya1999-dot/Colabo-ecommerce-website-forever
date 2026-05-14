@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import axios from 'axios';
-import './CSS/Order.css'; // We'll add styles here
+import './CSS/Order.css';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -25,12 +25,6 @@ const Orders = () => {
     }
   };
 
-  /* const handleTrack = (orderId) => {
-    // For now, just show the status; later we can expand to a popup or modal
-    const order = orders.find((o) => o._id === orderId);
-    alert(`Current Status: ${order.status}`);
-  }; */
-
   useEffect(() => {
     fetchOrders();
   }, [token]);
@@ -45,9 +39,24 @@ const Orders = () => {
           <div key={order._id} className="order-card">
             <div className="order-header">
               <h2>Order #{order._id.slice(-6)}</h2>
-              <p>Status: <span className={`status ${order.status.replace(/\s+/g, '-').toLowerCase()}`}>{order.status}</span></p>
-              <button className="track-btn" onClick={fetchOrders()}>Track</button>
+              <p>
+                Status:{' '}
+                <span
+                  className={`status ${order.status
+                    .replace(/\s+/g, '-')
+                    .toLowerCase()}`}
+                >
+                  {order.status}
+                </span>
+              </p>
+              <button
+                className="track-btn"
+                onClick={() => alert(`Current Status: ${order.status}`)}
+              >
+                Track
+              </button>
             </div>
+
             <div className="order-items">
               {order.items.map((item) => (
                 <div key={item._id || item.productId} className="order-item">
@@ -61,8 +70,11 @@ const Orders = () => {
                 </div>
               ))}
             </div>
+
             <div className="order-footer">
-              <p>Total Amount: <strong>{currency}{order.amount}</strong></p>
+              <p>
+                Total Amount: <strong>{currency}{order.amount}</strong>
+              </p>
               <p>Payment Method: {order.paymentMethod}</p>
             </div>
           </div>

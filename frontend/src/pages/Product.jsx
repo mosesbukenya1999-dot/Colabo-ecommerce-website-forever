@@ -127,7 +127,7 @@ const Product = () => {
           <img src={image} alt="" />
         </div>
 
-        {/* Details */}
+        {/* Details */}  
         <div className="product-details">
           <h2>{productData.name}</h2>
           <p className="brand">
