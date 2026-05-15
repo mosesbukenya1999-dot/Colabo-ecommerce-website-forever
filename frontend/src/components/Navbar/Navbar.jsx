@@ -1,6 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Navbar as BSNavbar, Nav, Container } from "react-bootstrap";
-import { Search, Cart, Heart, X } from "react-bootstrap-icons";
+import { NavLink } from "react-router-dom";
+
+import {
+  Search,
+  Cart,
+  Heart,
+  X,
+  HouseDoor,
+  Bag,
+  Stars,
+  Person,
+  BoxArrowRight,
+} from "react-bootstrap-icons";
+
 import "./Navbar.css";
 import { ShopContext } from "../../context/ShopContext";
 
@@ -8,7 +21,13 @@ const AppNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
-  const { getCartCount, token, setToken, setCartItems, navigate } = useContext(ShopContext);
+  const {
+    getCartCount,
+    token,
+    setToken,
+    setCartItems,
+    navigate,
+  } = useContext(ShopContext);
 
   const logout = () => {
     navigate("/login");
@@ -19,84 +38,238 @@ const AppNavbar = () => {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const closeMenu = () => setExpanded(false);
 
   return (
-    <BSNavbar
-      className={`custom-navbar ${scrolled ? "scrolled" : ""}`}
-      expand="lg"
-      expanded={expanded}
-    >
-      <Container>
-        {/* BRAND */}
-        <BSNavbar.Brand className="fw-bold text-black">
-          <a href="/" className="text-decoration-none text-black">
-            COZA <span className="fw-medium store-text">STORE</span>
-          </a>
-        </BSNavbar.Brand>
+    <>
+      {/* ================= DESKTOP NAVBAR ================= */}
 
-        {/* CART (MOBILE) */}
-        <a href="/cart" className="cart-container d-md-none" onClick={closeMenu}>
-          <Cart className="nav-icon text-secondary" />
-          <p>{getCartCount()}</p>
-        </a>
+      <BSNavbar
+        className={`custom-navbar desktop-navbar ${
+          scrolled ? "scrolled" : ""
+        }`}
+        expand="lg"
+        expanded={expanded}
+      >
+        <Container>
+          {/* BRAND */}
 
-        {/* TOGGLE */}
-        <BSNavbar.Toggle
-          aria-controls="main-nav"
-          onClick={() => setExpanded(!expanded)}
-          className="hamburger"
-        />
+          <BSNavbar.Brand className="fw-bold text-black">
+            <NavLink
+              to="/"
+              className="text-decoration-none text-black"
+            >
+              COZA <span className="fw-medium store-text">STORE</span>
+            </NavLink>
+          </BSNavbar.Brand>
 
-        <BSNavbar.Collapse id="main-nav">
-          {/* CLOSE BUTTON (MOBILE ONLY) */}
-          <div className="mobile-close d-lg-none">
-            <X onClick={closeMenu} />
+          {/* TOGGLE */}
+
+          <BSNavbar.Toggle
+            aria-controls="main-nav"
+            onClick={() => setExpanded(!expanded)}
+            className="hamburger"
+          />
+
+          <BSNavbar.Collapse id="main-nav">
+
+            {/* CLOSE BUTTON */}
+
+            <div className="mobile-close d-lg-none">
+              <X onClick={closeMenu} />
+            </div>
+
+            {/* NAV LINKS */}
+
+            <Nav className="me-auto ms-auto nav-links">
+
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+                onClick={closeMenu}
+              >
+                Home
+              </NavLink>
+
+              <NavLink
+                to="/shop"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+                onClick={closeMenu}
+              >
+                Shop
+              </NavLink>
+
+              <NavLink
+                to="/features"
+                className={({ isActive }) =>
+                  isActive
+                    ? "nav-link active-link position-relative"
+                    : "nav-link position-relative"
+                }
+                onClick={closeMenu}
+              >
+                Features
+                <span className="hot-badge">HOT</span>
+              </NavLink>
+
+              <NavLink
+                to="/blog"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+                onClick={closeMenu}
+              >
+                Blog
+              </NavLink>
+
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+                onClick={closeMenu}
+              >
+                About
+              </NavLink>
+
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+                onClick={closeMenu}
+              >
+                Contact
+              </NavLink>
+
+            </Nav>
+
+            {/* RIGHT ACTIONS */}
+
+            <div className="nav-actions">
+
+              <Search className="nav-icon" />
+
+              <NavLink
+                to="/cart"
+                className="cart-container"
+                onClick={closeMenu}
+              >
+                <Cart className="nav-icon" />
+
+                <p>{getCartCount()}</p>
+              </NavLink>
+
+              <Heart className="nav-icon" />
+
+            </div>
+
+          </BSNavbar.Collapse>
+        </Container>
+      </BSNavbar>
+
+      {/* ================= MOBILE BOTTOM NAV ================= */}
+
+      <div className="mobile-bottom-nav">
+
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "mobile-nav-item mobile-active"
+              : "mobile-nav-item"
+          }
+        >
+          <HouseDoor className="mobile-bottom-icon" />
+          <span>Home</span>
+        </NavLink>
+
+        <NavLink
+          to="/shop"
+          className={({ isActive }) =>
+            isActive
+              ? "mobile-nav-item mobile-active"
+              : "mobile-nav-item"
+          }
+        >
+          <Bag className="mobile-bottom-icon" />
+          <span>Shop</span>
+        </NavLink>
+
+        <NavLink
+          to="/features"
+          className={({ isActive }) =>
+            isActive
+              ? "mobile-nav-item mobile-active"
+              : "mobile-nav-item"
+          }
+        >
+          <div className="mobile-feature-wrapper">
+            <Stars className="mobile-bottom-icon" />
+
+            <small className="mobile-hot-badge">
+              HOT
+            </small>
           </div>
 
-          {/* NAV LINKS */}
-          <Nav className="me-auto ms-auto nav-links">
-            <a href="/" className="nav-link" onClick={closeMenu}>Home</a>
-            <a href="/shop" className="nav-link" onClick={closeMenu}>Shop</a>
-            <a href="/features" className="nav-link position-relative" onClick={closeMenu}>
-              Features
-              <span className="hot-badge">HOT</span>
-            </a>
-            <a href="/blog" className="nav-link" onClick={closeMenu}>Blog</a>
-            <a href="/about" className="nav-link" onClick={closeMenu}>About</a>
-            <a href="/contact" className="nav-link" onClick={closeMenu}>Contact</a>
-          </Nav>
+          <span>Features</span>
+        </NavLink>
 
-          {/* RIGHT SIDE ACTIONS */}
-          <div className="nav-actions">
-            <Search className="nav-icon" />
+        <NavLink
+          to="/cart"
+          className={({ isActive }) =>
+            isActive
+              ? "mobile-nav-item mobile-active"
+              : "mobile-nav-item"
+          }
+        >
+          <div className="mobile-cart-wrapper">
 
-            {/* CART */}
-            <a href="/cart" className="cart-container" onClick={closeMenu}>
-              <Cart className="nav-icon" />
-              <p>{getCartCount()}</p>
-            </a>
+            <Cart className="mobile-bottom-icon" />
 
-            <Heart className="nav-icon" />
+            <div className="mobile-cart-badge">
+              {getCartCount()}
+            </div>
 
-            {/* LOGIN / LOGOUT (MOBILE) */}
-            {token === "" ? (
-              <a href="/login" className="mobile-login-btn d-lg-none" onClick={closeMenu}>
-                Login
-              </a>
-            ) : (
-              <a href="/login" className="mobile-login-btn d-lg-none" onClick={logout}>
-                Logout
-              </a>
-            )}
           </div>
-        </BSNavbar.Collapse>
-      </Container>
-    </BSNavbar>
+
+          <span>Cart</span>
+        </NavLink>
+
+        {token === "" ? (
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              isActive
+                ? "mobile-nav-item mobile-active"
+                : "mobile-nav-item"
+            }
+          >
+            <Person className="mobile-bottom-icon" />
+            <span>Login</span>
+          </NavLink>
+        ) : (
+          <button
+            className="mobile-nav-item logout-btn"
+            onClick={logout}
+          >
+            <BoxArrowRight className="mobile-bottom-icon" />
+            <span>Logout</span>
+          </button>
+        )}
+
+      </div>
+    </>
   );
 };
 

@@ -158,7 +158,7 @@ const PlaceOrder = () => {
                 checked={paymentMethod === "paypal"}
                 onChange={() => setPaymentMethod("paypal")}
               />
-              <FaPaypal size={20} className="me-2" /> PayPal
+              <FaPaypal size={20} className="me-2 text-primary" /> PayPal
             </label>
 
             <label
@@ -173,7 +173,7 @@ const PlaceOrder = () => {
                 checked={paymentMethod === "stripe"}
                 onChange={() => setPaymentMethod("stripe")}
               />
-              <FaStripe size={20} className="me-2" /> Stripe
+              <FaStripe size={20} className="me-2 text-success" /> Stripe
             </label>
           </div>
 

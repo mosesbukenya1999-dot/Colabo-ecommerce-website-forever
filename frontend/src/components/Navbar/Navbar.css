@@ -1,19 +1,22 @@
+/* ================= NAVBAR BASE ================= */
 
-/* NAVBAR BASE */
 .custom-navbar {
   position: fixed;
   top: 45px;
   left: 50%;
   transform: translateX(-50%);
+
   width: 100%;
   z-index: 999;
 
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
+
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
   border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.12);
+
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
 
   transition: all 0.4s ease;
 }
@@ -22,41 +25,56 @@
   border: none;
 }
 
-/* SCROLL EFFECT */
+/* ================= SCROLL EFFECT ================= */
+
 .custom-navbar.scrolled {
-  transform: translateX(-50%) scale(0.95);
+  transform: translateX(-50%) scale(0.96);
   border-radius: 50px;
 }
 
-/* BRAND */
+/* ================= BRAND ================= */
+
 .navbar-brand {
   font-size: 1.5rem;
 }
 
-/* NAV LINKS */
+.store-text {
+  color: #eda1a1;
+}
+
+/* ================= NAV LINKS ================= */
+
 .nav-link {
-  position: relative; /* REQUIRED for underline */
+  position: relative;
+
   font-weight: 500;
   color: #333 !important;
+
   margin: 0 10px;
+
   transition: color 0.3s ease;
 }
 
-/* HOVER COLOR */
 .nav-link:hover {
-  color: #000 !important;
+  color: black !important;
 }
 
-/* 🔥 UNDERLINE ANIMATION */
+/* UNDERLINE */
+
 .nav-link::after {
   content: "";
+
   position: absolute;
   left: 0;
   bottom: -4px;
+
   width: 0%;
   height: 2px;
+
   background: black;
+
   transition: width 0.3s ease;
+
   border-radius: 10px;
 }
 
@@ -64,26 +82,33 @@
   width: 100%;
 }
 
-.nav-link.active::after {
-  width: 100%;
-}
+/* ================= HOT BADGE ================= */
 
-/* HOT BADGE */
 .hot-badge {
   position: absolute;
+
   top: -6px;
   right: -18px;
+
   background: #ff3e3e;
   color: white;
+
   font-size: 0.6rem;
+  font-weight: 600;
+
   padding: 2px 6px;
+
   border-radius: 10px;
+
+  animation: hotPulse 1.8s infinite;
 }
 
-/* ICONS */
+/* ================= ICONS ================= */
+
 .nav-icon {
   font-size: 1.2rem;
   cursor: pointer;
+
   transition: 0.3s;
 }
 
@@ -91,14 +116,16 @@
   transform: scale(1.1);
 }
 
-/* RIGHT ACTIONS */
+/* ================= NAV ACTIONS ================= */
+
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* CART */
+/* ================= CART ================= */
+
 .cart-container {
   position: relative;
   color: black;
@@ -106,23 +133,31 @@
 
 .cart-container p {
   position: absolute;
+
   top: -8px;
   right: -10px;
+
   background: black;
   color: white;
+
   width: 16px;
   height: 16px;
+
   font-size: 10px;
+
   border-radius: 50%;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* MOBILE CLOSE BUTTON */
+/* ================= MOBILE CLOSE ================= */
+
 .mobile-close {
   display: flex;
   justify-content: flex-end;
+
   padding: 10px 15px;
 }
 
@@ -131,127 +166,198 @@
   cursor: pointer;
 }
 
-.hot-badge {
+/* ================= DESKTOP ONLY ================= */
+
+.desktop-navbar {
+  display: flex;
+}
+
+@media (max-width: 991px) {
+  .desktop-navbar {
+    display: none !important;
+  }
+}
+
+/* ================= MOBILE BOTTOM NAV ================= */
+
+.mobile-bottom-nav {
+  position: fixed;
+
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 70px;
+
+  background: rgba(255,255,255,0.96);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-top: 1px solid rgba(0,0,0,0.08);
+
+  display: none;
+
+  justify-content: space-around;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+/* SHOW ON MOBILE */
+
+@media (max-width: 991px) {
+  .mobile-bottom-nav {
+    display: flex;
+  }
+}
+
+/* ================= MOBILE NAV ITEMS ================= */
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  text-decoration: none;
+  color: #444;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-item:hover {
+  transform: translateY(-2px);
+  color: black;
+}
+
+.mobile-bottom-icon {
+  font-size: 1.35rem;
+}
+
+/* ================= MOBILE CART ================= */
+
+.mobile-cart-wrapper {
+  position: relative;
+}
+
+.mobile-cart-badge {
   position: absolute;
+
   top: -6px;
-  right: -18px;
+  right: -8px;
 
-  background: #ff3e3e;
+  width: 17px;
+  height: 17px;
+
+  border-radius: 50%;
+
+  background: #ff3040;
   color: white;
-  font-size: 0.6rem;
-  padding: 2px 6px;
-  border-radius: 10px;
-  font-weight: 600;
 
-  /* ✨ glow effect */
-  box-shadow: 0 0 0 rgba(255, 62, 62, 0.6);
+  font-size: 9px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= MOBILE HOT BADGE ================= */
+
+.mobile-feature-wrapper {
+  position: relative;
+}
+
+.mobile-hot-badge {
+  position: absolute;
+
+  top: -8px;
+  right: -16px;
+
+  background: #ff3040;
+  color: white;
+
+  font-size: 7px;
+  font-weight: bold;
+
+  padding: 2px 4px;
+
+  border-radius: 10px;
 
   animation: hotPulse 1.8s infinite;
 }
 
-/* 🔐 LOGIN BUTTON (MOBILE ONLY) */
-.mobile-login-btn {
-  padding: 6px 12px;
-  background: black;
-  color: white !important;
-  border-radius: 20px;
-  font-size: 12px;
-  text-decoration: none;
-  display: none;
+/* ================= LOGOUT BUTTON ================= */
+
+.logout-btn {
+  background: transparent;
+  border: none;
 }
 
-.store-text {
-  color: #eda1a1;
-}
-
-/* TABLET + MOBILE */
-@media (max-width: 992px) {
-
-  .mobile-login-btn {
-    display: inline-block;
-  }
-
-  .hot-badge {
-    width: 40px;
-  }
-
-  .nav-actions {
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px 0;
-  }
-
-  .nav-link {
-    margin: 10px 0;
-  }
-
-  .hot-badge {
-    position: absolute;
-    left: 15%;
-    top: 1%;
-    width: auto;
-  }
-}
-
-/* 📱 IPHONE 7 OPTIMIZATION */
-@media (max-width: 480px) {
-
-  .custom-navbar {
-    width: 100%;
-    border-radius: 0;
-    top: 0;
-  }
-
-  .nav-actions {
-    gap: 10px;
-  }
-
-  .nav-icon {
-    font-size: 1.1rem;
-  }
-
-  .hot-badge {
-    width: 40px;
-  }
-
-  .mobile-login-btn {
-    font-size: 11px;
-    padding: 5px 10px;
-  }
-
-  .cart-container p {
-    width: 14px;
-    height: 14px;
-    font-size: 9px;
-  }
-}
+/* ================= HOT ANIMATION ================= */
 
 @keyframes hotPulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(255, 62, 62, 0.6);
     opacity: 1;
   }
 
-  25% {
-    transform: scale(1.08);
-    box-shadow: 0 0 10px 3px rgba(255, 62, 62, 0.4);
-  }
-
   50% {
-    transform: scale(1);
-    box-shadow: 0 0 18px 6px rgba(255, 62, 62, 0.25);
-  }
-
-  75% {
-    transform: scale(1.05);
-    box-shadow: 0 0 8px 2px rgba(255, 62, 62, 0.35);
-    opacity: 0.95;
+    transform: scale(1.08);
+    opacity: 0.9;
   }
 
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(255, 62, 62, 0);
     opacity: 1;
   }
+}
+
+/* ================= IPHONE SAFE AREA ================= */
+
+@supports (padding: max(0px)) {
+  .mobile-bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom);
+
+    height: calc(70px + env(safe-area-inset-bottom));
+  }
+}
+/* ================= ACTIVE DESKTOP LINK ================= */
+
+.active-link {
+  color: #ff3040 !important;
+}
+
+.active-link::after {
+  width: 100% !important;
+  background: #ff3040;
+}
+
+/* ================= ACTIVE MOBILE LINK ================= */
+
+.mobile-active {
+  color: rgb(212, 89, 89) !important;
+
+  
+}
+
+.mobile-active .mobile-bottom-icon {
+  color: rgb(230, 119, 119);
+}
+
+.mobile-active span {
+  color: rgb(230, 104, 104);
+}
+
+/* SMOOTH TRANSITION */
+
+.mobile-nav-item {
+  transition: all 0.3s ease;
 }

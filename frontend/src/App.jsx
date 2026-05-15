@@ -12,7 +12,6 @@ import Login from './pages/Login'
 import TopBar from './components/Topbar/TopBar'
 import Footer from './components/Footer/Footer'
 import PlaceOrder from './components/PlaceOrder/PlaceOrder'
-import Breadcrumb from './components/BreadCrumb/Breadcrumb'
 import Orders from './pages/Orders'
 
 const App = () => {
@@ -20,7 +19,7 @@ const App = () => {
     <div>
       <TopBar/>
       <AppNavbar/>
-      <Breadcrumb/>
+     
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/features' element={<Collection/>}/>
