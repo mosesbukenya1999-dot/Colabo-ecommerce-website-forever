@@ -9,71 +9,37 @@ const createToken = (id)=>{
 
 const registerUser = async (req, res) => {
     try {
-
         const { name, email, password } = req.body;
+        let profileImageUrl = "";
 
-        // Check missing fields
+        // If a file was uploaded, Cloudinary automatically returns the URL in req.file.path
+        if (req.file) {
+            profileImageUrl = req.file.path;
+        }
+
         if (!name || !email || !password) {
-            return res.json({
-                success: false,
-                message: "All fields are required"
-            });
+            return res.json({ success: false, message: "All fields are required" });
         }
 
-        // Check existing user
         const exists = await userModel.findOne({ email });
+        if (exists) return res.json({ success: false, message: "User already exists" });
 
-        if (exists) {
-            return res.json({
-                success: false,
-                message: "User already exists"
-            });
-        }
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Validate email
-        if (!validator.isEmail(email)) {
-            return res.json({
-                success: false,
-                message: "Please enter a valid email"
-            });
-        }
-
-        // Password validation
-        if (password.length < 8) {
-            return res.json({
-                success: false,
-                message: "Use a strong password"
-            });
-        }
-
-        // Hash password
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
-        // Save user
         const newUser = new userModel({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            profileImage: profileImageUrl
         });
 
         const user = await newUser.save();
-
-        // Create token
         const token = createToken(user._id);
 
-        res.json({
-            success: true,
-            token
-        });
-
+        res.json({ success: true, token });
     } catch (error) {
         console.log(error);
-
-        res.json({
-            success: false,
-            message: error.message
-        });
+        res.json({ success: false, message: error.message });
     }
 };
 
@@ -105,7 +71,13 @@ const loginUser = async (req,res)=>{
 const adminLogin = async (req,res)=>{
     try {
         
-        
+        const {email, password} = req.body;
+
+        if (email=== process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+            const token = jwt.sign(email + password, process.env.JWT_SECRET);
+        }else{
+            res.json({success:false, message: "Invalid Match!!!"})
+        }
 
     } catch (error) {
         console.log(error);
