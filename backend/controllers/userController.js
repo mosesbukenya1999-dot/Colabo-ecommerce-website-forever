@@ -68,6 +68,29 @@ const loginUser = async (req,res)=>{
     }
 }
 
+const getCurrentUser = async (req, res) => {
+    try {
+      const authHeader = req.headers.authorization;
+      if (!authHeader) {
+        return res.json({ success: false, message: "No token provided" });
+      }
+  
+      const token = authHeader.split(" ")[1];
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  
+      const user = await userModel.findById(decoded.id).select("-password"); // exclude password
+  
+      if (!user) return res.json({ success: false, message: "User not found" });
+  
+      res.json({ success: true, user });
+    } catch (error) {
+      console.log(error);
+      res.json({ success: false, message: error.message });
+    }
+  };
+  
+  export { getCurrentUser };
+
 const adminLogin = async (req,res)=>{
     try {
         
@@ -85,4 +108,4 @@ const adminLogin = async (req,res)=>{
     }
 }
 
-export { registerUser, loginUser, adminLogin}
+export { registerUser, loginUser, adminLogin, getCurrentUser}
