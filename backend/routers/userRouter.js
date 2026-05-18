@@ -7,6 +7,6 @@ const userRouter = express.Router();
 userRouter.post("/register", uploadProfile.single("profileImage"), registerUser)
 userRouter.post("/login", loginUser)
 userRouter.post("/admin", adminLogin)
-userRouter.post("/me", getCurrentUser)
+userRouter.get("/me", getCurrentUser)
 
 export default userRouter
