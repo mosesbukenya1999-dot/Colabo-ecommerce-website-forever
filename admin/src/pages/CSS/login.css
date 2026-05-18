@@ -1,0 +1,100 @@
+/* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Form styles */
+  .real-form {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .real-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 35px rgba(0,0,0,0.3);
+  }
+  
+  /* Container inside form */
+  .form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  /* Input container */
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .input-container p {
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .input-container input {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.3s;
+  }
+  
+  .input-container input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 8px rgba(102, 126, 234, 0.5);
+  }
+  
+  /* Button styles */
+  .btn {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-danger {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: #fff;
+  }
+  
+  .btn-danger:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(255, 75, 43, 0.4);
+  }
+  
+  /* Flex-column helper */
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .real-form {
+      padding: 30px 20px;
+    }
+  }

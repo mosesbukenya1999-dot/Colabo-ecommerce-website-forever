@@ -1,0 +1,113 @@
+/* ------------------- Desktop Sidebar ------------------- */
+.sidebar {
+    width: 220px;
+    background-color: #fff;
+    height: 100vh;
+    padding: 20px 0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #e63946;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: 0.2s;
+  }
+  
+  .sidebar-link .icon {
+    font-size: 1.5rem;
+  }
+  
+  .sidebar-link:hover {
+    background-color: #ffeaea;
+    color: #e63946;
+  }
+  
+  .sidebar-link.active-link {
+    background-color: #f7e2e4;
+    color: #0b0303;
+  }
+  
+  .logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+  
+  /* ------------------- Mobile Bottom Navbar ------------------- */
+  .mobile-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #555;
+    text-decoration: none;
+    transition: 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .mobile-nav-item .icon {
+    font-size: 1.5rem;
+  }
+  
+  .mobile-nav-item:hover,
+  .mobile-nav-item.mobile-active {
+    color: #e63946;
+  }
+  
+  .mobile-nav-item.mobile-active .icon {
+    color: #e63946;
+  }
+  
+  .link-text {
+    margin-top: 3px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  /* Responsive tweaks */
+  @media(min-width: 992px){
+    .mobile-bottom-nav {
+      display: none;
+    }
+  }
