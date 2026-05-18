@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import "./ProductSee.css";
 import { ShopContext } from '../../context/ShopContext';
 import ProductItem from '../productItem/ProductItem';
+import { FaMale, FaFemale, FaChild, FaShoePrints, } from 'react-icons/fa';
+import { MdWatch } from "react-icons/md"; 
+import { AiOutlineAppstore } from 'react-icons/ai';
 
 const ProductSee = () => {
     const { products, loading, error, fetchProducts } = useContext(ShopContext);
@@ -25,6 +28,16 @@ const ProductSee = () => {
         setFilteredProducts(updated);
     }, [products, activeCategory, sortOption]);
 
+    // Map category to icon
+    const categoryIcons = {
+        "All": <AiOutlineAppstore />,
+        "Kids": <FaChild />,
+        "Men": <FaMale />,
+        "Women": <FaFemale />,
+        "Shoes": <FaShoePrints />,
+        "Watches": <MdWatch /> 
+    };
+
     return (
         <div className='container product-see'>
 
@@ -37,14 +50,15 @@ const ProductSee = () => {
                             className={activeCategory === cat ? "active text-white" : "text-dark"}
                             onClick={() => setActiveCategory(cat)}
                         >
+                            <span className="filter-icon">{categoryIcons[cat]}</span>
                             {cat}
                         </button>
                     ))}
                 </div>
 
                 {/* SORT */}
-                <select className=' sort' onChange={(e) => setSortOption(e.target.value)} value={sortOption}>
-                    <option value="relevant">Sort By:Relevant</option>
+                <select className='sort' onChange={(e) => setSortOption(e.target.value)} value={sortOption}>
+                    <option value="relevant">Sort By: Relevant</option>
                     <option value="low-high">Sort By: Low - High</option>
                     <option value="high-low">Sort By: High - Low</option>
                 </select>

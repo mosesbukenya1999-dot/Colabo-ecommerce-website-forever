@@ -1,11 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import "./Topwear.css";
 import { NavLink } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
 
 const TopBar = () => {
 
-  const {token,setToken,setCartItems,navigate} = useContext(ShopContext);
+  const {token,setToken,setCartItems,navigate,backendUrl} = useContext(ShopContext);
 
   const logout = ()=> {
     navigate("/login")
@@ -13,10 +13,29 @@ const TopBar = () => {
     setToken("");
     setCartItems({});
   }
+
+  const fetchMe = async()=> {
+    try {
+      const res = await fetch(`${backendUrl}/api/users/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      alert(error.message)
+    }
+  }
+
+  useEffect(()=> {
+    fetchMe()
+  },[token])
   
   return (
     <div className=' container-fluid bg-dark d-none d-md-flex text-light justify-content-around py-1'>
         <div className="left-col mt-3">
+          <div>
+
+          </div>
         Free shipping for standard order over $100
         </div>
         <div className="right-col d-flex gap-4 mt-3">

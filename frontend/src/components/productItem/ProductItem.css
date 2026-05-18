@@ -1,12 +1,12 @@
 .card-container {
     display: block;
     position: relative;
-    background: white;
+    background: rgb(247, 236, 223);
     overflow: hidden;
     text-decoration: none;
     color: black;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     width: 100%;
     max-width: 260px;
     margin: 0 auto;
@@ -31,7 +31,7 @@
 }
 
 .heart-btn i {
-    color: #ff4d6d; /* nice soft red */
+    color: #d95623; /* nice soft red */
     font-size: 18px;
     transition: transform 0.3s ease, color 0.3s ease;
 }
@@ -120,7 +120,7 @@
     font-size: 16px;
     font-weight: bold;
     margin-top: 4px;
-    color: rgb(122, 159, 239);
+    color: rgb(222, 136, 78);
 }
 
 .right {

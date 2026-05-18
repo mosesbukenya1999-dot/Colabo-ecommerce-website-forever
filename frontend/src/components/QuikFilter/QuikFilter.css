@@ -1,121 +1,125 @@
 /* Container layout */
 .filter-cards {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 40px;
-        margin-bottom:100px
-  }
-  
-  /* Card */
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 100px;
+  padding: 20px 10px;
+  align-items: center;
+  justify-content: start;
+}
+
+/* Card */
+.filter-card {
+  width: 90px; 
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+}
+
+/* Hover lift */
+.filter-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Image wrapper */
+.image-wrapper {
+  width: 100%;
+  height: 90px; /* fixed height for all cards */
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgb(221, 173, 123);
+}
+
+/* Image */
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+/* Zoom on hover */
+.filter-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Title below image */
+.filter-title {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  color: #e7a462;
+  word-break: break-word;
+}
+
+/* Desktop & large tablets */
+@media (min-width: 992px) {
   .filter-card {
-    width: 30rem;
+    width: 90px; /* ~5 per row depending on container */
+  }
+}
 
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    border: 1px solid rgb(186, 186, 186);
+/* Medium tablets */
+@media (max-width: 991px) {
+  .filter-card {
+    width: 22%; /* ~4 per row */
   }
-  
-  /* Hover lift */
-  .filter-card:hover {
-    transform: translateY(-8px);
+  .filter-cards {
+    gap: 12px;
   }
-  
-  /* Image wrapper */
+}
+
+/* Small tablets / large phones */
+@media (max-width: 768px) {
+  .filter-card {
+    width: 28%; /* ~3 per row */
+  }
   .image-wrapper {
-    position: relative;
-    overflow: hidden;
+    height: 80px;
   }
-  
-  /* Image */
-  .image-wrapper img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    object-position: center top;   /* try these */
-    /* object-position: center; */
-    /* object-position: top; */
-    /* object-position: bottom; */
-  }
-  
-  /* Zoom on hover */
-  .filter-card:hover img {
-    transform: scale(1.1);
-  }
-  
-  /* Overlay */
-  .overlay {
-    position: absolute;
-    inset: 0;
-    
-    transition: 0.3s ease;
-  }
-  
-  /* Darker on hover */
-  .filter-card:hover .overlay {
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.8),
-      rgba(0, 0, 0, 0.2)
-    );
-  }
-  
-  /* Text content */
-  .overlay-content {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: #fff;
-    z-index: 2;
-  }
-  
-  .overlay-content h5 {
-    font-size: 1.5rem;
-    margin: 0;
-    font-weight: 600;
-    color: rgb(155, 155, 234);
-  }
-  
-  .overlay-content p {
-    font-size: 0.9rem;
-    opacity: 0.85;
-    margin-bottom: 10px;
-    color: rgb(234, 154, 154);
-  }
-
-  .overlay-content hr {
-    background-color: #1b1923;
-    height: 2px;
-    border-radius: 30px;
-    width: 200px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.9);
-  }
-  
-  /* Button */
-  .overlay-btn {
-    padding: 6px 14px;
-    border: none;
-    background: #fff;
-    color: #000;
+  .filter-title {
     font-size: 0.8rem;
-    border-radius: 20px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: all 0.3s ease;
   }
-  
-  /* Button animation */
-  .filter-card:hover .overlay-btn {
-    opacity: 1;
-    transform: translateY(0);
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .filter-card {
+    width: 30%; /* ~3 per row */
   }
-  
-  /* Mobile */
-  @media (max-width: 768px) {
-    .filter-card {
-      width: 100%;
-    }
+  .image-wrapper {
+    height: 70px;
   }
+  .filter-title {
+    font-size: 0.75rem;
+  }
+  .filter-cards {
+    gap: 10px;
+  }
+}
+
+/* Extra small iPhones (SE, 12 mini) */
+@media (max-width: 375px) {
+  .filter-card {
+    width: 32%; /* ~3 per row */
+  }
+  .image-wrapper {
+    height: 65px;
+  }
+  .filter-title {
+    font-size: 0.7rem;
+  }
+  .filter-cards {
+    gap: 8px;
+    padding: 10px 5px;
+  }
+}

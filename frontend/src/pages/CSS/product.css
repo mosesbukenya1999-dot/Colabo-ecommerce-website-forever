@@ -45,7 +45,7 @@
 
 .product-thumbnails img.active,
 .product-thumbnails img:hover {
-  border-color: #4f6ef7;
+  border-color: #edb58b;
   transform: scale(1.05);
 }
 
@@ -87,7 +87,7 @@
 .product-details h2 {
   font-size: 26px;
   font-weight: 700;
-  color: #222;
+  color: #e1843d;
 }
 
 .product-details .brand {
@@ -108,7 +108,7 @@
 .price {
   font-size: 22px;
   font-weight: 700;
-  color: #4f6ef7;
+  color: #f7794f;
 }
 
 .description {
@@ -141,8 +141,8 @@
 
 .sizes button.active,
 .sizes button:hover {
-  border-color: #4f6ef7;
-  background: #4f6ef7;
+  border-color: #ffd4ab;
+  background: #ba7411;
   color: white;
 }
 
@@ -155,7 +155,7 @@
 }
 
 .add-cart {
-  background: #4f6ef7;
+  background: #ca4d17;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -168,7 +168,7 @@
 }
 
 .add-cart:hover {
-  background: #3a55c2;
+  background: #fab798;
 }
 
 .whish-list-icon {
@@ -191,6 +191,7 @@
 .whish-list-icon p {
   margin: 0;
   font-size: 14px;
+  color: #ba7411;
 }
 
 /* ----------------- PROMO ----------------- */
@@ -217,7 +218,7 @@
   width: 50px;
   height: 50px;
   border: 5px solid #f3f3f3;
-  border-top: 5px solid #4f6ef7;
+  border-top: 5px solid #c27b24;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }

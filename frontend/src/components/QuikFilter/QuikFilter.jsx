@@ -1,48 +1,38 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import "./QuikFilter.css";
 
 import filter_one from "../../assets/filter_one.png";
 import filter_two from "../../assets/filter_two.png";
 import filter_three from "../../assets/filter_three.png";
 
+import filter_four from "../../assets/com_img.png";
+import filter_five from "../../assets/bag_img.png";
+import filter_six from "../../assets/winter_wear.png";
+
 const filters = [
-  {
-    title: "Women",
-    subtitle: "Spring 2030",
-    image: filter_one,
-  },
-  {
-    title: "Men",
-    subtitle: "Spring 2030",
-    image: filter_two,
-  },
-  {
-    title: "Accessories",
-    subtitle: "New Trend",
-    image: filter_three,
-  },
+  { title: "Women", link: "/shop/women", image: filter_one },
+  { title: "Men", link: "/shop/men", image: filter_two },
+  { title: "Accessories", link: "/shop/accessories", image: filter_three },
+  { title: "Cosmetics", link: "/shop/women", image: filter_four },
+  { title: "Bags", link: "/shop/men", image:filter_five },
+  { title: "Winterwear", link: "/shop/accessories", image: filter_six },
 ];
 
 const QuikFilter = () => {
   return (
-    <div className=" filter-cards container">
+    <div className="filter-cards container">
       {filters.map((item, index) => (
-        <div className="filter-card" key={index}>
+        <NavLink
+          to={item.link}
+          className="filter-card"
+          key={index}
+        >
           <div className="image-wrapper">
             <img src={item.image} alt={item.title} />
-
-            {/* Overlay */}
-            <div className="overlay"></div>
-
-            {/* Content */}
-            <div className="overlay-content">
-              <h5>{item.title}</h5>
-              <p>{item.subtitle}</p>
-              <hr />
-              <button className="overlay-btn">Shop Now</button>
-            </div>
           </div>
-        </div>
+          <h3 className="filter-title">{item.title}</h3>
+        </NavLink>
       ))}
     </div>
   );

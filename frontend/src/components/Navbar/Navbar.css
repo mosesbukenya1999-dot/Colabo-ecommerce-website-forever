@@ -1,23 +1,16 @@
 /* ================= NAVBAR BASE ================= */
-
 .custom-navbar {
   position: fixed;
   top: 45px;
   left: 50%;
   transform: translateX(-50%);
-
   width: 100%;
   z-index: 999;
-
-  background: rgba(255, 255, 255, 0.88);
-
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.322);
+  backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(12px);
-
   border-radius: 10px;
-
   box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
-
   transition: all 0.4s ease;
 }
 
@@ -26,98 +19,78 @@
 }
 
 /* ================= SCROLL EFFECT ================= */
-
 .custom-navbar.scrolled {
   transform: translateX(-50%) scale(0.96);
   border-radius: 50px;
 }
 
 /* ================= BRAND ================= */
-
 .navbar-brand {
   font-size: 1.5rem;
 }
-
+.logo-brand {
+  padding: 10px 10px;
+  font-weight: 700;
+}
 .store-text {
-  color: #eda1a1;
+  color: #ad6737;
+  font-family: sans-serif;
+  background-color: #efb58e77;
+  padding: 10px 10px;
+  border-radius: 15px;
 }
 
 /* ================= NAV LINKS ================= */
-
 .nav-link {
   position: relative;
-
   font-weight: 500;
-  color: #333 !important;
-
+  color: #535353 !important;
   margin: 0 10px;
-
   transition: color 0.3s ease;
 }
-
 .nav-link:hover {
-  color: black !important;
+  color: rgb(175, 123, 46) !important;
 }
-
-/* UNDERLINE */
-
 .nav-link::after {
   content: "";
-
   position: absolute;
   left: 0;
   bottom: -4px;
-
   width: 0%;
   height: 2px;
-
   background: black;
-
   transition: width 0.3s ease;
-
   border-radius: 10px;
 }
-
 .nav-link:hover::after {
   width: 100%;
 }
 
 /* ================= HOT BADGE ================= */
-
 .hot-badge {
   position: absolute;
-
   top: -6px;
   right: -18px;
-
   background: #ff3e3e;
   color: white;
-
   font-size: 0.6rem;
   font-weight: 600;
-
   padding: 2px 6px;
-
   border-radius: 10px;
-
   animation: hotPulse 1.8s infinite;
 }
 
 /* ================= ICONS ================= */
-
 .nav-icon {
   font-size: 1.2rem;
   cursor: pointer;
-
   transition: 0.3s;
 }
-
 .nav-icon:hover {
   transform: scale(1.1);
 }
 
 /* ================= NAV ACTIONS ================= */
-
 .nav-actions {
   display: flex;
   align-items: center;
@@ -125,87 +98,87 @@
 }
 
 /* ================= CART ================= */
-
 .cart-container {
   position: relative;
   color: black;
 }
-
 .cart-container p {
   position: absolute;
-
   top: -8px;
   right: -10px;
-
   background: black;
   color: white;
-
   width: 16px;
   height: 16px;
-
   font-size: 10px;
-
   border-radius: 50%;
-
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 /* ================= MOBILE CLOSE ================= */
-
 .mobile-close {
   display: flex;
   justify-content: flex-end;
-
   padding: 10px 15px;
 }
-
 .mobile-close svg {
   font-size: 28px;
   cursor: pointer;
 }
 
 /* ================= DESKTOP ONLY ================= */
-
 .desktop-navbar {
   display: flex;
 }
-
 @media (max-width: 991px) {
   .desktop-navbar {
     display: none !important;
   }
 }
 
-/* ================= MOBILE BOTTOM NAV ================= */
-
-.mobile-bottom-nav {
-  position: fixed;
-
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-  height: 70px;
-
-  background: rgba(255,255,255,0.96);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  border-top: 1px solid rgba(0,0,0,0.08);
-
+/* ================= MOBILE TOP BRAND ================= */
+.mobile-top-brand {
   display: none;
-
-  justify-content: space-around;
-  align-items: center;
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 15px;
+  background: rgba(247, 186, 126, 0.418);
+  backdrop-filter: blur(5px);
   z-index: 9999;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.mobile-top-brand .logo-brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333333;
+}
+@media (max-width: 991px) {
+  .mobile-top-brand {
+    display: block;
+  }
 }
 
-/* SHOW ON MOBILE */
-
+/* ================= MOBILE BOTTOM NAV ================= */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(250, 160, 87, 0.124);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(187, 92, 45, 0.08);
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 9999;
+}
 @media (max-width: 991px) {
   .mobile-bottom-nav {
     display: flex;
@@ -213,151 +186,76 @@
 }
 
 /* ================= MOBILE NAV ITEMS ================= */
-
 .mobile-nav-item {
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
-
   gap: 4px;
-
   text-decoration: none;
-  color: #444;
-
+  color: #9b5315;
   font-size: 11px;
   font-weight: 500;
-
   transition: all 0.3s ease;
 }
-
 .mobile-nav-item:hover {
   transform: translateY(-2px);
   color: black;
 }
-
 .mobile-bottom-icon {
   font-size: 1.35rem;
 }
-
-/* ================= MOBILE CART ================= */
-
 .mobile-cart-wrapper {
   position: relative;
 }
-
 .mobile-cart-badge {
   position: absolute;
-
   top: -6px;
   right: -8px;
-
   width: 17px;
   height: 17px;
-
   border-radius: 50%;
-
   background: #ff3040;
   color: white;
-
   font-size: 9px;
   font-weight: bold;
-
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-/* ================= MOBILE HOT BADGE ================= */
-
 .mobile-feature-wrapper {
   position: relative;
 }
-
 .mobile-hot-badge {
   position: absolute;
-
   top: -8px;
   right: -16px;
-
   background: #ff3040;
   color: white;
-
   font-size: 7px;
   font-weight: bold;
-
   padding: 2px 4px;
-
   border-radius: 10px;
-
   animation: hotPulse 1.8s infinite;
 }
-
-/* ================= LOGOUT BUTTON ================= */
-
 .logout-btn {
   background: transparent;
   border: none;
 }
 
 /* ================= HOT ANIMATION ================= */
-
 @keyframes hotPulse {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  50% {
-    transform: scale(1.08);
-    opacity: 0.9;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.9; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-/* ================= IPHONE SAFE AREA ================= */
-
-@supports (padding: max(0px)) {
-  .mobile-bottom-nav {
-    padding-bottom: env(safe-area-inset-bottom);
-
-    height: calc(70px + env(safe-area-inset-bottom));
-  }
-}
 /* ================= ACTIVE DESKTOP LINK ================= */
-
-.active-link {
-  color: #ff3040 !important;
-}
-
-.active-link::after {
-  width: 100% !important;
-  background: #ff3040;
-}
+.active-link { color: #87581d !important; }
+.active-link::after { width: 100% !important; background: #6e4718; }
 
 /* ================= ACTIVE MOBILE LINK ================= */
+.mobile-active { color: rgb(212, 89, 89) !important; }
+.mobile-active .mobile-bottom-icon { color: rgb(234, 82, 0); }
+.mobile-active span { color: rgb(230, 104, 104); }
 
-.mobile-active {
-  color: rgb(212, 89, 89) !important;
-
-  
-}
-
-.mobile-active .mobile-bottom-icon {
-  color: rgb(230, 119, 119);
-}
-
-.mobile-active span {
-  color: rgb(230, 104, 104);
-}
-
-/* SMOOTH TRANSITION */
-
-.mobile-nav-item {
-  transition: all 0.3s ease;
-}
