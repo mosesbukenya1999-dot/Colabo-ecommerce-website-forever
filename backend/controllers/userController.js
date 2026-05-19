@@ -70,9 +70,7 @@ const loginUser = async (req,res)=>{
 
 const getCurrentUser = async (req, res) => {
     try {
-  
-      const user = await userModel.findOne({email}) // exclude password
-  
+      const user = await userModel.findById(req.user.id).select("-password");
       if (!user) return res.json({ success: false, message: "User not found" });
   
       res.json({ success: true, user });
