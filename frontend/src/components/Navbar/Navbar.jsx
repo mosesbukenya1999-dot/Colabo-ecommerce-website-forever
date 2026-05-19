@@ -152,6 +152,8 @@ const AppNavbar = () => {
               </NavLink>
               <Heart className="nav-icon" />
 
+            </div>
+          </BSNavbar.Collapse>
               {token && currentUser ? (
                 <div className="user-info">
                   <img
@@ -167,8 +169,6 @@ const AppNavbar = () => {
                   <Person />
                 </NavLink>
               )}
-            </div>
-          </BSNavbar.Collapse>
         </Container>
       </BSNavbar>
 

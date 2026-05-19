@@ -28,7 +28,7 @@
 /* Page Title */
 .page-title {
   text-align: center;
-  color: #e63946;
+  color: #dc7045;
   margin-bottom: 25px;
   font-size: 22px;
   font-weight: bold;
@@ -40,14 +40,14 @@
   padding: 12px 15px;
   margin-bottom: 15px;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #dfd6d1;
   font-size: 14px;
   transition: 0.2s;
 }
 
 .form-container input:focus {
   outline: none;
-  border-color: #e63946;
+  border-color: #e65f39;
   box-shadow: 0 0 5px rgba(230, 57, 70, 0.3);
 }
 
@@ -55,7 +55,7 @@
 .placeorder-btn {
   width: 100%;
   padding: 14px 0;
-  background: #e63946;
+  background: #ed7332;
   color: #fff;
   border-radius: 12px;
   font-size: 16px;
@@ -147,7 +147,7 @@
 
 .payment-method h4 {
   margin-bottom: 20px;
-  color: #e63946;
+  color: #cf5b2e;
   font-size: 20px;
   font-weight: 700;
   text-align: center;
@@ -160,7 +160,7 @@
 
 .payment-method-cards h4 {
   margin-bottom: 15px;
-  color: #e63946;
+  color: #ca8229;
   font-size: 1.3rem;
 }
 
@@ -171,7 +171,7 @@
   margin-bottom: 12px;
   border-radius: 12px;
   border: 2px solid transparent;
-  background-color: #f8f9fa;
+  background-color: #f6eee5;
   cursor: pointer;
   transition: all 0.3s;
   box-shadow: 0 3px 6px rgba(0,0,0,0.05);
@@ -184,7 +184,7 @@
 }
 
 .payment-card.selected {
-  border-color: #e63946;
+  border-color: #e67839;
   background-color: #ffeaea;
 }
 
