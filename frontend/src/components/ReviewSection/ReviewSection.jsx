@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import "./ReviewSection.css";
 
 const ReviewsSection = () => {
-  const { token, backendUrl, navigate } = useContext(ShopContext);
+  const { token, backendUrl, navigate, currentUser } = useContext(ShopContext);
   const { productId } = useParams();
 
   const [reviews, setReviews] = useState([]);
@@ -120,7 +120,10 @@ const ReviewsSection = () => {
     .map((r) => (
       <div key={r._id} className="review-card">
         <div className="review-header">
+          <div>
+        
           <span className="review-user">{r.userName}</span>
+          </div>
           <span className="review-date">
             {new Date(r.createdAt).toLocaleDateString()}
           </span>

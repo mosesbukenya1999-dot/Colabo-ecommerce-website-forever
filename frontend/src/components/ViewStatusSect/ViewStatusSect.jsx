@@ -49,7 +49,7 @@ const ViewStatusSect = () => {
   <div className="tab-content">
     {status === "Description" && <p>{productData.description}</p>}
     {status === "Specification" && <p>Specification will be here</p>}
-    {status === "Reviews" && <p>{<ReviewsSection/>}</p>}
+    {status === "Reviews" && <ReviewsSection/>}
   </div>
 </div>
   )

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./CSS/cart.css";
 
 const Cart = () => {
-  const { cartItems, products, currency, updateQuantity, updatingItems} =
+  const { cartItems, products, currency, updateQuantity, updatingItems } =
     useContext(ShopContext);
   const navigate = useNavigate(); // useNavigate hook
   const [cartData, setCartData] = useState([]);
@@ -63,7 +63,7 @@ const Cart = () => {
               <div className="d-grid grid-header">
                 <b>Image</b>
                 <b>Name</b>
-                <b>Quantity</b>
+                <b>Qty</b>
                 <b>Size</b>
                 <b>Total</b>
                 <b>Remove</b>
@@ -77,21 +77,19 @@ const Cart = () => {
                     <img src={productData.images[0]} alt="" />
                     <p>{productData.name}</p>
                     <input
-  type="number"
-  min={0}
-  value={item.quantity}
-  className="qty-input"
-  disabled={updatingItems[`${item._id}_${item.size}`]} // disable while updating
-  onChange={(e) => {
-    const value = Number(e.target.value);
-    if (!isNaN(value)) {
-      updateQuantity(item._id, item.size, value);
-    }
-  }}
-/>
-                    <p>
-                      {item.size}
-                    </p>
+                      type="number"
+                      min={0}
+                      value={item.quantity}
+                      className="qty-input"
+                      disabled={updatingItems[`${item._id}_${item.size}`]} // disable while updating
+                      onChange={(e) => {
+                        const value = Number(e.target.value);
+                        if (!isNaN(value)) {
+                          updateQuantity(item._id, item.size, value);
+                        }
+                      }}
+                    />
+                    <p>{item.size}</p>
                     <p>
                       {currency}
                       {productData.price}
@@ -100,7 +98,7 @@ const Cart = () => {
                       onClick={() => updateQuantity(item._id, item.size, 0)}
                       className="remove-btn"
                     >
-                      <i className="bi bi-trash"></i>
+                      <i className="bi bi-trash fs-5"></i>
                     </p>
                   </div>
                 );
@@ -136,7 +134,12 @@ const Cart = () => {
                     .toFixed(2)}
                 </span>
               </p>
-              <button onClick={()=> navigate("/place-order")} className="checkout-btn">Proceed to Checkout</button>
+              <button
+                onClick={() => navigate("/place-order")}
+                className="checkout-btn"
+              >
+                Proceed to Checkout
+              </button>
             </div>
           </div>
         </div>
