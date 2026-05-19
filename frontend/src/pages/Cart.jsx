@@ -15,13 +15,16 @@ const Cart = () => {
     if (products.length > 0) {
       for (const productId in cartItems) {
         for (const size in cartItems[productId]) {
-          try {
-            tempData.push({
-              _id: productId,
-              size: size,
-              quantity: cartItems[productId][size],
-            });
-          } catch (error) {}
+          if (cartItems[productId][size]>0) {
+            
+            try {
+              tempData.push({
+                _id: productId,
+                size: size,
+                quantity: cartItems[productId][size],
+              });
+            } catch (error) {}
+          }
         }
       }
     }
