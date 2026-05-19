@@ -128,54 +128,33 @@ const PlaceOrder = () => {
           ))}
 
           {/* Payment Method */}
-          <div className="payment-method">
-            <h4>Payment Method</h4>
+<div className="payment-method-cards">
+  <h4>Payment Method</h4>
 
-            <label
-              className={`payment-option ${
-                paymentMethod === "cod" ? "selected" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                name="payment"
-                value="cod"
-                checked={paymentMethod === "cod"}
-                onChange={() => setPaymentMethod("cod")}
-              />
-              <FaMoneyBillWave size={20} className="me-2" /> Cash on Delivery
-            </label>
+  <div
+    className={`payment-card ${paymentMethod === "cod" ? "selected" : ""}`}
+    onClick={() => setPaymentMethod("cod")}
+  >
+    <FaMoneyBillWave size={28} className="icon" />
+    <span>Cash on Delivery</span>
+  </div>
 
-            <label
-              className={`payment-option ${
-                paymentMethod === "paypal" ? "selected" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                name="payment"
-                value="paypal"
-                checked={paymentMethod === "paypal"}
-                onChange={() => setPaymentMethod("paypal")}
-              />
-              <FaPaypal size={20} className="me-2 text-primary" /> PayPal
-            </label>
+  <div
+    className={`payment-card ${paymentMethod === "paypal" ? "selected" : ""}`}
+    onClick={() => setPaymentMethod("paypal")}
+  >
+    <FaPaypal size={28} className="icon text-primary" />
+    <span>PayPal</span>
+  </div>
 
-            <label
-              className={`payment-option ${
-                paymentMethod === "stripe" ? "selected" : ""
-              }`}
-            >
-              <input
-                type="radio"
-                name="payment"
-                value="stripe"
-                checked={paymentMethod === "stripe"}
-                onChange={() => setPaymentMethod("stripe")}
-              />
-              <FaStripe size={20} className="me-2 text-success" /> Stripe
-            </label>
-          </div>
+  <div
+    className={`payment-card ${paymentMethod === "stripe" ? "selected" : ""}`}
+    onClick={() => setPaymentMethod("stripe")}
+  >
+    <FaStripe size={28} className="icon text-success" />
+    <span>Stripe</span>
+  </div>
+</div>
 
           <button
             className="placeorder-btn"
