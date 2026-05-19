@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext} from 'react'
 import "./Topwear.css";
 import { NavLink } from 'react-router-dom';
 import { ShopContext } from '../../context/ShopContext';
@@ -14,22 +14,6 @@ const TopBar = () => {
     setCartItems({});
   }
 
-  const fetchMe = async()=> {
-    try {
-      const res = await fetch(`${backendUrl}/api/users/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-      alert(error.message)
-    }
-  }
-
-  useEffect(()=> {
-    fetchMe()
-  },[token])
-  
   return (
     <div className=' container-fluid bg-dark d-none d-md-flex text-light justify-content-around py-1'>
         <div className="left-col mt-3">

@@ -18,6 +18,7 @@ const ShopContextProvider = ({ children }) => {
 
     const [cartLoading, setCartLoading] = useState(false); // overall cart loading
     const [updatingItems, setUpdatingItems] = useState({}); // per-item loading
+    const [currentUser, setCurrentUser] = useState(null);
 
     const navigate = useNavigate();
 
@@ -145,6 +146,23 @@ const ShopContextProvider = ({ children }) => {
         }
     };
 
+    const fetchCurrentUser = async () => {
+        if (!token) return;
+        try {
+            const res = await axios.get(`${backendUrl}/api/users/me`, {
+                headers: { token }
+            });
+            console.log(res.data);
+            if (res.data.success) setCurrentUser(res.data.user);
+        } catch (err) {
+            console.error("Failed to fetch user:", err);
+        }
+    };
+
+    useEffect(() => {
+        if (token) fetchCurrentUser();
+    }, [token]);
+
     useEffect(() => {
         fetchProducts();
     }, []);
@@ -175,6 +193,8 @@ const ShopContextProvider = ({ children }) => {
         navigate,
         token,
         setToken,
+        currentUser,       // <-- Add this
+        setCurrentUser,    // <-- Optional, if you want to update user manually
         cartLoading,
         updatingItems
     };

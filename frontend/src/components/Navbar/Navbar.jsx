@@ -19,8 +19,15 @@ import { ShopContext } from "../../context/ShopContext";
 const AppNavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const { getCartCount, token, setToken, setCartItems, navigate } =
-    useContext(ShopContext);
+
+  const {
+    getCartCount,
+    token,
+    setToken,
+    setCartItems,
+    navigate,
+    currentUser,
+  } = useContext(ShopContext);
 
   const logout = () => {
     navigate("/login");
@@ -48,9 +55,7 @@ const AppNavbar = () => {
 
       {/* ================= DESKTOP NAVBAR ================= */}
       <BSNavbar
-        className={`custom-navbar desktop-navbar ${
-          scrolled ? "scrolled" : ""
-        }`}
+        className={`custom-navbar desktop-navbar ${scrolled ? "scrolled" : ""}`}
         expand="lg"
         expanded={expanded}
       >
@@ -146,6 +151,22 @@ const AppNavbar = () => {
                 <p>{getCartCount()}</p>
               </NavLink>
               <Heart className="nav-icon" />
+
+              {token && currentUser ? (
+                <div className="user-info">
+                  <img
+                    src={currentUser.profilePic || "/default-avatar.png"}
+                    alt={currentUser.name}
+                    className="profile-pic"
+                  />
+                  <span className="user-name ms-3">{currentUser.name}</span>
+                  
+                </div>
+              ) : (
+                <NavLink to="/login" className="nav-icon">
+                  <Person />
+                </NavLink>
+              )}
             </div>
           </BSNavbar.Collapse>
         </Container>
@@ -158,7 +179,7 @@ const AppNavbar = () => {
           className={({ isActive }) =>
             isActive ? "mobile-nav-item mobile-active" : "mobile-nav-item"
           }
-        >
+        >   
           <HouseDoor className="mobile-bottom-icon" />
           <span>Home</span>
         </NavLink>
@@ -199,7 +220,16 @@ const AppNavbar = () => {
           <span>Cart</span>
         </NavLink>
 
-        {token === "" ? (
+        {token && currentUser ? (
+          <button className="mobile-nav-item logout-btn" onClick={logout}>
+            <img
+              src={currentUser.profilePic || "/default-avatar.png"}
+              alt={currentUser.name}
+              className="mobile-profile-pic"
+            />
+            <span>{currentUser.name}</span>
+          </button>
+        ) : (
           <NavLink
             to="/login"
             className={({ isActive }) =>
@@ -209,15 +239,10 @@ const AppNavbar = () => {
             <Person className="mobile-bottom-icon" />
             <span>Login</span>
           </NavLink>
-        ) : (
-          <button className="mobile-nav-item logout-btn" onClick={logout}>
-            <BoxArrowRight className="mobile-bottom-icon" />
-            <span>Logout</span>
-          </button>
         )}
       </div>
     </>
   );
 };
 
-export default AppNavbar;
+export default AppNavbar; 
