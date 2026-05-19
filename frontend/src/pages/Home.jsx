@@ -2,6 +2,7 @@ import React from 'react'
 import Hero from '../components/Hero/Hero'
 import QuikFilter from '../components/QuikFilter/QuikFilter'
 import ProductSee from '../components/ProductSee/ProductSee'
+import TextureClothSect from '../components/TextureClothSect/TextureClothSect'
 
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
         <Hero/>
         <QuikFilter/>
        <ProductSee/>
+       <TextureClothSect/>
     </div>
   )
 }

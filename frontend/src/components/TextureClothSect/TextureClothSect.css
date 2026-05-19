@@ -1,0 +1,158 @@
+.texture-section {
+    width: 100%;
+    min-height: 100vh;
+    background: #fcfafa;
+    padding: 80px 6%;
+    overflow: hidden;
+  }
+  
+  .texture-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .texture-small-text {
+    color: #b0b0b0;
+    letter-spacing: 5px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  
+  .texture-header h2 {
+    color: rgb(244, 169, 120);
+    font-size: 60px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  
+  .texture-description {
+    max-width: 700px;
+    margin: auto;
+    color: #9f9f9f;
+    line-height: 1.7;
+    font-size: 17px;
+  }
+  
+  .texture-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  
+  .texture-card {
+    position: relative;
+    height: 520px;
+    border-radius: 30px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .texture-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  
+  .texture-card:hover .texture-video {
+    transform: scale(1.1);
+  }
+  
+  .texture-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9),
+      rgba(0, 0, 0, 0.2),
+      transparent
+    );
+  }
+  
+  .texture-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    padding: 30px;
+  }
+  
+  .texture-content p {
+    color: #d0d0d0;
+    font-size: 13px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+  .texture-content h3 {
+    color: white;
+    font-size: 32px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  .texture-content button {
+    padding: 14px 26px;
+    border-radius: 50px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-size: 15px;
+  }
+  
+  .texture-content button:hover {
+    background: white;
+    color: black;
+  }
+  
+  /* ========================= */
+  /* TABLET RESPONSIVE */
+  /* ========================= */
+  
+  @media (max-width: 1024px) {
+    .texture-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .texture-header h2 {
+      font-size: 48px;
+    }
+  }
+  
+  /* ========================= */
+  /* MOBILE RESPONSIVE */
+  /* ========================= */
+  
+  @media (max-width: 768px) {
+    .texture-section {
+      padding: 60px 20px;
+    }
+  
+    .texture-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  
+    .texture-card {
+      height: 420px;
+    }
+  
+    .texture-header h2 {
+      font-size: 38px;
+    }
+  
+    .texture-description {
+      font-size: 15px;
+    }
+  
+    .texture-content h3 {
+      font-size: 26px;
+    }
+  
+    .texture-content button {
+      width: 100%;
+    }
+  }
