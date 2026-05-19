@@ -1,6 +1,6 @@
 .orders-container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 60px auto;
     padding: 20px;
     font-family: Arial, sans-serif;
   }
@@ -9,11 +9,12 @@
     text-align: center;
     margin-bottom: 30px;
     font-size: 2rem;
-    color: #333;
+    color: #d36a1e;
+    font-weight: 600;
   }
   
   .order-card {
-    border: 1px solid #ddd;
+    border: 1px solid #e9c6ac;
     border-radius: 10px;
     margin-bottom: 20px;
     padding: 20px;
@@ -36,7 +37,7 @@
   .order-header h2 {
     margin: 0;
     font-size: 1.2rem;
-    color: #222;
+    color: #cf6214;
   }
   
   .status {
@@ -48,13 +49,13 @@
     text-transform: capitalize;
   }
   
-  .status.order-placed { background-color: #3498db; }
+  .status.order-placed { background-color: #db7f34; }
   .status.packing { background-color: #f39c12; }
   .status.shipped { background-color: #27ae60; }
   .status.delivered { background-color: #2ecc71; }
   
   .track-btn {
-    background-color: #2980b9;
+    background-color: #cf5938;
     color: white;
     padding: 6px 14px;
     border: none;
@@ -65,7 +66,7 @@
   }
   
   .track-btn:hover {
-    background-color: #1c5980;
+    background-color: #80601c;
   }
   
   .order-items {
@@ -79,13 +80,14 @@
   .order-item {
     display: flex;
     gap: 15px;
-    border: 1px solid #eee;
+    border: 1px solid #f4dfcf;
     padding: 15px;
     border-radius: 8px;
     flex: 1 1 250px;
     min-width: 250px;
     max-width: 350px;
     transition: transform 0.2s ease;
+    background-color: #fdf8f3;
   }
   
   .order-item:hover {
@@ -97,6 +99,7 @@
     height: 100px;
     object-fit: cover;
     border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
   }
   
   .item-details h3 {
@@ -108,7 +111,7 @@
   .item-details p {
     margin: 2px 0;
     font-size: 0.9rem;
-    color: #555;
+    color: #d2863a;
   }
   
   .order-footer {
@@ -118,7 +121,7 @@
     flex-wrap: wrap;
     font-weight: bold;
     font-size: 0.95rem;
-    color: #222;
+    color: #e8542c;
   }
   
   @media (max-width: 992px) {
