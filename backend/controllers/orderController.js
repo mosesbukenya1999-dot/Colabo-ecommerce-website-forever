@@ -2,36 +2,58 @@ import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js";
 
 
-const placeOrder = async(req,res)=> {
+const placeOrder = async (req, res) => {
     try {
-        
-        const {items,address,amount} = req.body;
-
-        const userId = req.user.id;
-
-        const orderData = { 
-            items,
-            address,
-            amount,
-            userId,
-            paymentMethod: "COD",
-            payment: false,
-            date: Date.now(),
-        };
-
-        const newOrder = new orderModel(orderData);
-
-        const order = await newOrder.save();
-
-        await userModel.findByIdAndUpdate(userId,{ cartData:{}});
-
-        res.json({success:true, message: "Order Placed"})
-
+  
+      const { items, address, amount } = req.body;
+  
+      const userId = req.user.id;
+  
+      // Remove invalid items
+      const filteredItems = items.filter(
+        (item) => item.quantity > 0
+      );
+  
+      // Optional: prevent empty orders
+      if (filteredItems.length === 0) {
+        return res.json({
+          success: false,
+          message: "No valid items in order"
+        });
+      }
+  
+      const orderData = {
+        items: filteredItems,
+        address,
+        amount,
+        userId,
+        paymentMethod: "COD",
+        payment: false,
+        date: Date.now(),
+      };
+  
+      const newOrder = new orderModel(orderData);
+  
+      await newOrder.save();
+  
+      await userModel.findByIdAndUpdate(userId, {
+        cartData: {}
+      });
+  
+      res.json({
+        success: true,
+        message: "Order Placed"
+      });
+  
     } catch (error) {
-        console.log(error);
-        res.json({success:false,message:error.message})
+      console.log(error);
+  
+      res.json({
+        success: false,
+        message: error.message
+      });
     }
-}
+  };
 
 const placeOrderStripe = async(req,res)=> {
     try {
