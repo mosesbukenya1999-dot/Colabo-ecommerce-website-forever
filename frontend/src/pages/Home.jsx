@@ -3,6 +3,7 @@ import Hero from '../components/Hero/Hero'
 import QuikFilter from '../components/QuikFilter/QuikFilter'
 import ProductSee from '../components/ProductSee/ProductSee'
 import TextureClothSect from '../components/TextureClothSect/TextureClothSect'
+import LatestProducts from '../components/LatestProducts/LatestProducts'
 
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
         <QuikFilter/>
        <ProductSee/>
        <TextureClothSect/>
+       <LatestProducts/>
     </div>
   )
 }

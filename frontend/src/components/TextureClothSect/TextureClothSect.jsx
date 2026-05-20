@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./TextureClothSect.css";
 
 import vidOne from "../../assets/vid_one.mp4";
 import vidTwo from "../../assets/vid_two.mp4";
 import vidThree from "../../assets/vid_three.mp4";
 
+// Video list
 const videos = [
   {
     id: 1,
@@ -12,14 +13,12 @@ const videos = [
     subtitle: "Modern Streetwear",
     video: vidOne,
   },
-
   {
     id: 2,
     title: "Luxury Fabric Motion",
     subtitle: "Premium Cotton",
     video: vidTwo,
   },
-
   {
     id: 3,
     title: "Soft Cloth Texture",
@@ -27,6 +26,42 @@ const videos = [
     video: vidThree,
   },
 ];
+
+// Lazy-loading Video component
+const LazyVideo = ({ src, className }) => {
+  const videoRef = useRef();
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.unobserve(videoRef.current);
+        }
+      },
+      { threshold: 0.25 }
+    );
+
+    if (videoRef.current) observer.observe(videoRef.current);
+
+    return () => {
+      if (videoRef.current) observer.unobserve(videoRef.current);
+    };
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={inView ? src : ""}
+      autoPlay
+      muted
+      loop
+      playsInline
+      className={className}
+    />
+  );
+};
 
 const TextureClothSect = () => {
   return (
@@ -45,14 +80,8 @@ const TextureClothSect = () => {
       <div className="texture-grid">
         {videos.map((item) => (
           <div className="texture-card" key={item.id}>
-            <video
-              src={item.video}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="texture-video"
-            />
+            {/* Lazy-loaded video */}
+            <LazyVideo src={item.video} className="texture-video" />
 
             <div className="texture-overlay"></div>
 
