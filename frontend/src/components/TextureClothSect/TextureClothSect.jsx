@@ -65,7 +65,7 @@ const LazyVideo = ({ src, className }) => {
 
 const TextureClothSect = () => {
   return (
-    <section className="texture-section">
+    <section className="texture-section d-none d-md-flex">
       <div className="texture-header">
         <p className="texture-small-text">FASHION MATERIAL</p>
 

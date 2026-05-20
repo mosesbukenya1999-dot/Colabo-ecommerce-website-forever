@@ -124,6 +124,15 @@ const AppNavbar = () => {
                 Blog
               </NavLink>
               <NavLink
+                to="/orders"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active-link" : "nav-link"
+                }
+                onClick={closeMenu}
+              >
+                Orders
+              </NavLink>
+              <NavLink
                 to="/about"
                 className={({ isActive }) =>
                   isActive ? "nav-link active-link" : "nav-link"
@@ -194,6 +203,8 @@ const AppNavbar = () => {
           <span>Shop</span>
         </NavLink>
 
+        
+
         <NavLink
           to="/features"
           className={({ isActive }) =>
@@ -208,6 +219,19 @@ const AppNavbar = () => {
         </NavLink>
 
         <NavLink
+          to="/orders"
+          className={({ isActive }) =>
+            isActive ? "mobile-nav-item mobile-active" : "mobile-nav-item"
+          }
+        >
+          <div className="mobile-cart-wrapper">
+            <i className="bi bi-basket fs-4"></i>
+            
+          </div>
+          <span>Orders</span>
+        </NavLink>
+        
+        <NavLink
           to="/cart"
           className={({ isActive }) =>
             isActive ? "mobile-nav-item mobile-active" : "mobile-nav-item"
@@ -219,6 +243,7 @@ const AppNavbar = () => {
           </div>
           <span>Cart</span>
         </NavLink>
+
 
         {token && currentUser ? (
           <button className="mobile-nav-item logout-btn" onClick={logout}>
