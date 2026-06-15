@@ -17,7 +17,7 @@ const placeOrder = async (req, res) => {
       return res.json({ success: false, message: "No items in order" });
     }
 
-    // ---------------- CHECK STOCK FIRST ----------------
+    // ---------------- CHECK STOCK ----------------
     for (const item of items) {
       const product = await productModel.findById(item._id);
       if (!product) {
@@ -50,10 +50,7 @@ const placeOrder = async (req, res) => {
       const key = item.size || "default";
 
       await productModel.updateOne(
-        {
-          _id: item._id,
-          "variants.size": key,
-        },
+        { _id: item._id, "variants.size": key },
         {
           $inc: {
             "variants.$.stock": -item.quantity,
@@ -62,19 +59,14 @@ const placeOrder = async (req, res) => {
       );
     }
 
-    // ---------------- SAFE ORDER ITEMS ----------------
+    // ---------------- SAFE ITEMS ----------------
     const safeItems = items.map((item) => ({
       _id: item._id,
       name: item.name,
       quantity: item.quantity,
       price: item.price || 0,
-      variantPrice: item.price || 0,
       size: item.size || "default",
-      sellerApplicationId: item.sellerApplicationId
-        ? typeof item.sellerApplicationId === "object"
-          ? item.sellerApplicationId._id
-          : item.sellerApplicationId
-        : null,
+      sellerApplicationId: item.sellerApplicationId || null,
     }));
 
     // ---------------- CREATE ORDER ----------------
@@ -91,37 +83,41 @@ const placeOrder = async (req, res) => {
 
     const customer = await userModel.findById(userId);
 
-    // ---------------- GROUP SELLER ITEMS ----------------
-    const sellerMap = {};
-
-    safeItems.forEach((item) => {
-      const sellerId = item.sellerApplicationId?.toString();
-      if (!sellerId) return;
-
-      if (!sellerMap[sellerId]) {
-        sellerMap[sellerId] = [];
-      }
-
-      sellerMap[sellerId].push(item);
-    });
-
-    // ---------------- ADMIN EMAIL ----------------
+    // ---------------- ADMIN EMAIL (IMPROVED) ----------------
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to: process.env.ADMIN_EMAIL,
       subject: "🛒 New Order Received",
+
       text: `
-New Order Placed
+🚨 NEW ORDER ALERT 🚨
 
 Order ID: ${order._id}
 
-Customer: ${customer.name}
+👤 CUSTOMER DETAILS
+Name: ${customer.name}
 Email: ${customer.email}
+Phone: ${address.phone || "N/A"}
 
-Amount: ${amount}
+📍 ADDRESS
+Street: ${address.street}
+City: ${address.city}
+State: ${address.state}
+Country: ${address.country}
+ZIP: ${address.zip}
 
-Items:
-${safeItems.map(i => `${i.name} x${i.quantity}`).join("\n")}
+💰 TOTAL: ${amount}
+
+🛍️ ITEMS:
+${safeItems
+  .map(
+    (i) =>
+      `- ${i.name}
+  Size: ${i.size}
+  Qty: ${i.quantity}
+  Price: ${i.price}`
+  )
+  .join("\n\n")}
       `,
     });
 
@@ -130,42 +126,17 @@ ${safeItems.map(i => `${i.name} x${i.quantity}`).join("\n")}
       from: process.env.EMAIL_FROM,
       to: customer.email,
       subject: "✅ Order Confirmation",
+
       text: `
 Thank you for your order!
 
 Order ID: ${order._id}
-
-Amount: ${amount}
+Total: ${amount}
 
 Items:
-${safeItems.map(i => `${i.name} x${i.quantity}`).join("\n")}
+${safeItems.map((i) => `${i.name} x${i.quantity}`).join("\n")}
       `,
     });
-
-    // ---------------- SELLER EMAILS ----------------
-    for (const sellerId in sellerMap) {
-      const seller = await sellerApplicationModel.findById(sellerId);
-      if (!seller) continue;
-
-      const items = sellerMap[sellerId];
-
-      await transporter.sendMail({
-        from: process.env.EMAIL_FROM,
-        to: seller.email,
-        subject: "📦 New Order for Your Store",
-        text: `
-New Order Received
-
-Order ID: ${order._id}
-
-Customer: ${customer.name}
-${customer.email}
-
-Items:
-${items.map(i => `${i.name} x${i.quantity}`).join("\n")}
-        `,
-      });
-    }
 
     // ---------------- CLEAR CART ----------------
     await userModel.findByIdAndUpdate(userId, { cartData: {} });
@@ -175,7 +146,6 @@ ${items.map(i => `${i.name} x${i.quantity}`).join("\n")}
       message: "Order placed successfully",
       orderId: order._id,
     });
-
   } catch (err) {
     console.log(err);
     res.json({ success: false, message: err.message });
